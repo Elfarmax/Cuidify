@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | CasaCuidado Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="appBody" style="background-color: #f1f5f9;">
+
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">🏠 CasaCuidado<span>Pro</span></div>
+        <div style="display: flex; gap: 15px;">
+            <button class="btn-outline" style="padding: 8px 15px;">👁️ Accesibilidad</button>
+            <button class="btn-primary" onclick="logout()" style="background: #2563eb;">Menú ☰</button>
+        </div>
+    </header>
+
+    <main class="section-container" style="max-width: 1000px; margin-top: 40px;">
+        
+        <div id="view-mode">
+            <div class="profile-card">
+                <div class="profile-header-main">
+                    <div class="avatar-large" id="avatar-char">M</div>
+                    <div style="flex: 1;">
+                        <h1 id="display-name" style="font-size: 2.2rem; margin-bottom: 5px;">Cargando...</h1>
+                        <p id="display-tagline" style="color: #2563eb; font-weight: 600;">Especialista verificado</p>
+                        <div class="badge-role" id="display-role">Trabajador</div>
+                        <p id="display-location" style="margin-top: 10px; color: var(--text-muted);">📍 Madrid, España</p>
+                    </div>
+                    <button class="btn-outline" onclick="toggleEditMode()" style="border-radius: 10px;">Editar Perfil</button>
+                </div>
+
+                <p id="display-bio" style="margin-top: 25px; line-height: 1.8; color: #475569;">
+                    Cargando biografía profesional...
+                </p>
+
+                <div class="contact-grid">
+                    <div class="contact-item">✉️ <span id="display-email">demo@correo.com</span></div>
+                    <div class="contact-item">📞 <span id="display-phone">+34 000 000 000</span></div>
+                    <div class="contact-item">🕒 <span id="display-horario">Lunes a Viernes</span></div>
+                    <div class="contact-item">💰 <span id="display-precio">15€/hora</span></div>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <h3 style="margin-bottom: 20px;">📌 Habilidades y Servicios</h3>
+                <div id="skills-container">
+                    <span class="pill-tag">Limpieza profunda</span>
+                    <span class="pill-tag">Cuidado de personas</span>
+                    <span class="pill-tag">Cocina saludable</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="edit-mode" style="display: none;">
+            <div class="profile-card">
+                <h2 style="margin-bottom: 25px;">Editar mis datos</h2>
+                <form id="form-edit-profile">
+                    <div class="form-grid">
+                        <div class="form-group"><label>Nombre</label><input type="text" id="edit-nombre"></div>
+                        <div class="form-group"><label>Apellidos</label><input type="text" id="edit-apellidos"></div>
+                        <div class="form-group"><label>Teléfono</label><input type="text" id="edit-phone" placeholder="+34..."></div>
+                        <div class="form-group"><label>Precio/hora (€)</label><input type="number" id="edit-precio"></div>
+                        <div class="form-group full"><label>Biografía Profesional</label>
+                            <textarea id="edit-bio" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; display: flex; gap: 10px;">
+                        <button type="submit" class="btn-primary">Guardar Cambios</button>
+                        <button type="button" class="btn-outline" onclick="toggleEditMode()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/perfil.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CasaCuidado Pro | Expertos en Confianza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="appBody">
+
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">🏠 CasaCuidado<span>Pro</span></div>
+        <nav class="nav-menu">
+            <a href="#info">Servicios</a>
+            <a href="registro.html">Ser Cuidador</a>
+            <a href="login.html" class="btn-primary">Entrar</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-clean">
+            <div class="hero-content">
+                <h1>Tu hogar merece el mejor <br><span>cuidado profesional</span></h1>
+                <p>Conectamos familias con profesionales verificados mediante IA. Seguridad y cariño en cada visita.</p>
+                <div class="hero-btns">
+                    <button class="btn-outline" onclick="scrollToSection('info')">Ver servicios</button>
+                    <a href="registro.html" class="btn-primary">Registrarse gratis</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="info" class="scroll-content">
+            <div class="section-container text-center">
+                <h2 style="margin-bottom: 40px;">¿Por qué elegirnos?</h2>
+                <div class="features-mini-grid">
+                    <div class="f-item">
+                        <span class="icon">🤖</span>
+                        <h4>IA Matching</h4>
+                        <p>Encontramos el perfil que mejor encaja con tus necesidades específicas.</p>
+                    </div>
+                    <div class="f-item">
+                        <span class="icon">🛡️</span>
+                        <h4>Seguridad 100%</h4>
+                        <p>Todos los profesionales pasan una entrevista y validación de antecedentes.</p>
+                    </div>
+                    <div class="f-item">
+                        <span class="icon">💬</span>
+                        <h4>Chat Directo</h4>
+                        <p>Habla con tu cuidador en tiempo real desde nuestra plataforma.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-wrap">
+            <div class="footer-left">
+                <strong>CasaCuidado Pro © 2026</strong>
+                <p>TFG - Desarrollo de Aplicaciones Web</p>
+            </div>
+            <div class="footer-right">
+                <select onchange="applyTheme(this.value)">
+                    <option value="normal">Modo Estándar</option>
+                    <option value="protanopia">Daltonismo</option>
+                    <option value="high-contrast">Contraste Alto</option>
+                </select>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #4f46e5;         /* Morado Profesional (Indigo) */
+    --primary-hover: #4338ca;
+    --primary-light: #f5f3ff;
+    --text-main: #0f172a;       /* Slate 900 */
+    --text-muted: #64748b;      /* Slate 500 */
+    --bg-light: #f8fafc;        /* Fondo General */
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --radius-lg: 24px;          /* Bordes modernos para tarjetas */
+    --radius-md: 12px;
+    --shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 30px 60px rgba(79, 70, 229, 0.15);
+}
+
+/* =========================================
+   2. ACCESIBILIDAD (Puntos Extra TFG)
+   ========================================= */
+body.protanopia { filter: saturate(1.4) hue-rotate(15deg); }
+body.achromatopsia { filter: grayscale(1); }
+body.high-contrast { 
+    --bg-light: #000000; 
+    --text-main: #00ff00; /* Verde neón para máximo contraste */
+    --primary: #ffff00; 
+    --white: #1a1a1a; 
+    --border: #00ff00;
+}
+
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+html { scroll-behavior: smooth; }
+
+body { 
+    background-color: var(--bg-light); 
+    color: var(--text-main); 
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   3. HEADER Y NAVEGACIÓN
+   ========================================= */
+header { 
+    padding: 15px 8%; 
+    background: var(--white); 
+    border-bottom: 1px solid var(--border); 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.logo { 
+    font-weight: 800; font-size: 1.4rem; 
+    color: var(--text-main); text-decoration: none; cursor: pointer;
+    letter-spacing: -1px;
+}
+.logo span { color: var(--primary); }
+
+.nav-menu {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+.nav-menu a:hover { color: var(--primary); }
+
+/* =========================================
+   4. COMPONENTES: BOTONES
+   ========================================= */
+.btn-primary { 
+    background: var(--primary); color: white; border: none; 
+    padding: 12px 28px; border-radius: var(--radius-md); 
+    font-weight: 700; font-size: 0.95rem; cursor: pointer; 
+    text-decoration: none; transition: all 0.3s ease; display: inline-block;
+}
+
+.btn-primary:hover { 
+    background: var(--primary-hover); 
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+}
+
+.btn-primary.full { width: 100%; text-align: center; }
+
+.btn-outline { 
+    background: var(--white); color: var(--text-main); border: 1px solid var(--border); 
+    padding: 12px 28px; border-radius: var(--radius-md); font-weight: 700; 
+    cursor: pointer; transition: 0.3s; text-decoration: none;
+}
+
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+/* =========================================
+   5. LANDING PAGE: HERO Y SECCIONES
+   ========================================= */
+/* HERO DE LA HOME: Imagen más nítida pero legible */
+.hero-clean { 
+    height: 85vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    padding: 0 20px;
+    
+    /* Bajamos la opacidad de 0.88 a 0.7 y 0.75 */
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.75)), 
+                url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=2000&auto=format&fit=crop');
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Esto le da un efecto de movimiento muy pro al hacer scroll */
+}
+
+.hero-clean h1 { 
+    font-size: 3.8rem; 
+    font-weight: 800; 
+    letter-spacing: -2px; 
+    margin-bottom: 20px; 
+    line-height: 1.1; 
+    color: var(--text-main);
+    /* Añadimos una sombra de texto muy suave para que resalte sobre la imagen más clara */
+    text-shadow: 0 2px 4px rgba(255,255,255,0.5);
+}
+
+.hero-clean h1 { 
+    font-size: 3.8rem; font-weight: 800; letter-spacing: -2px; 
+    margin-bottom: 20px; line-height: 1.1; color: var(--text-main);
+}
+.hero-clean h1 span { color: var(--primary); }
+
+.hero-clean p { 
+    font-size: 1.25rem; color: var(--text-muted); 
+    max-width: 650px; margin: 0 auto 40px; 
+}
+
+.hero-btns { display: flex; gap: 15px; justify-content: center; }
+
+.scroll-content { padding: 100px 10%; background: var(--white); }
+
+.section-container { max-width: 1200px; margin: 0 auto; }
+
+.text-center { text-align: center; }
+
+.info-block h2 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; }
+
+/* GRID DE TARJETAS (Servicios) */
+.features-mini-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; margin-top: 50px; 
+}
+
+.f-item { 
+    padding: 40px; border: 1px solid var(--border); 
+    border-radius: var(--radius-lg); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--white);
+}
+
+.f-item:hover { 
+    border-color: var(--primary); 
+    box-shadow: var(--shadow-hover); 
+    transform: translateY(-12px);
+}
+
+.f-item .icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+.f-item h4 { font-size: 1.3rem; margin-bottom: 12px; }
+
+/* =========================================
+   6. AUTENTICACIÓN (LOGIN Y REGISTRO)
+   ========================================= */
+.auth-center { 
+    flex: 1; display: flex; align-items: center; justify-content: center; 
+    padding: 60px 20px; background: var(--bg-light);
+}
+
+.auth-card { 
+    background: var(--white); padding: 50px; 
+    border-radius: var(--radius-lg); border: 1px solid var(--border); 
+    box-shadow: var(--shadow); width: 100%; max-width: 450px; 
+}
+
+.register-card-wide {
+    background: var(--white); padding: 50px; 
+    border-radius: var(--radius-lg); border: 1px solid var(--border); 
+    box-shadow: var(--shadow); width: 100%; max-width: 850px;
+}
+
+/* Formularios en Grid */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
+.form-group { margin-bottom: 20px; }
+.form-group.full { grid-column: span 2; }
+
+.form-group label { 
+    display: block; font-size: 0.9rem; font-weight: 700; 
+    margin-bottom: 8px; color: var(--text-main);
+}
+
+.form-group input, .form-group select, .form-group textarea { 
+    width: 100%; padding: 14px; border-radius: var(--radius-md); 
+    border: 1px solid var(--border); font-size: 1rem; transition: 0.2s;
+}
+
+.form-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); }
+
+/* Selector de Roles */
+.role-selector { display: flex; gap: 15px; margin-bottom: 40px; }
+
+.role-btn { 
+    flex: 1; padding: 18px; border-radius: var(--radius-md); 
+    border: 2px solid var(--border); background: var(--white); 
+    font-weight: 700; cursor: pointer; transition: 0.3s;
+}
+
+.role-btn.active { 
+    border-color: var(--primary); background: var(--primary-light); color: var(--primary); 
+}
+
+.step-title { 
+    grid-column: span 2; font-size: 0.85rem; font-weight: 800;
+    text-transform: uppercase; color: var(--primary); letter-spacing: 1px;
+    margin: 30px 0 15px; padding-bottom: 10px; border-bottom: 2px solid var(--primary-light);
+}
+
+/* =========================================
+   7. FOOTER
+   ========================================= */
+footer { padding: 50px 8%; background: var(--white); border-top: 1px solid var(--border); margin-top: auto; }
+.footer-wrap { display: flex; justify-content: space-between; align-items: center; }
+.footer-right { display: flex; align-items: center; gap: 30px; }
+
+.register-hint { margin-top: 30px; text-align: center; font-size: 1rem; color: var(--text-muted); }
+.register-hint a { color: var(--primary); font-weight: 700; text-decoration: none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+    .hero-clean h1 { font-size: 2.5rem; }
+    header { padding: 15px 5%; }
+    .nav-menu { display: none; } /* Ocultar menú en móvil para simplificar */
+}
+
+/* FONDO DEL LOGIN: Menos oscuro y más difuminado */
+.auth-page-wrapper {
+    position: relative; /* Necesario para que el fondo no tape el formulario */
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden; /* Evita que el desenfoque se salga de los bordes */
+}
+
+.auth-page-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    
+    /* IMAGEN + GRADIENTE MÁS CLARO (0.4 y 0.2 en vez de 0.8) */
+    background: linear-gradient(rgba(30, 27, 75, 0.4), rgba(30, 27, 75, 0.2)), 
+                url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    
+    /* EFECTO DIFUMINADO */
+    filter: blur(10px); 
+    transform: scale(1.1); /* Escala un poco para que el desenfoque no deje bordes blancos */
+    z-index: -1; /* Lo manda al fondo detrás de la tarjeta */
+}
+
+/* Ajuste de la tarjeta para que destaque sobre el fondo suave */
+.auth-page-wrapper .auth-card {
+    background: rgba(255, 255, 255, 0.95); /* Un pelín de transparencia */
+    backdrop-filter: blur(5px); /* Efecto cristal suave en la tarjeta */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15); /* Sombra más sutil */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Ajuste extra para la tarjeta sobre el fondo oscuro */
+.auth-page-wrapper .auth-card {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); /* Sombra más fuerte para que resalte */
+    border: none;
+}
+
+.auth-header h2 {
+    margin-bottom: 10px;
+}
+
+/* Bloque oculto que se desliza */
+.sliding-form-block {
+    display: none; 
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+}
+
+/* Clase que activa el despliegue */
+.sliding-form-block.show {
+    display: block;
+    max-height: 1200px; /* Suficiente para el contenido */
+    opacity: 1;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid var(--primary-light);
+}
+
+/* Ajuste para que la tarjeta de registro no se vea apretada */
+.register-card-wide {
+    background: var(--white);
+    padding: 40px 50px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 850px;
+}
+
+.step-title {
+    grid-column: span 2;
+    font-size: 0.9rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 25px 0 10px;
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 5px;
+}
+
+/* Estilos estilo Dashboard (Imagen referencia) */
+.profile-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.profile-header-main {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.avatar-large {
+    width: 100px;
+    height: 100px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.badge-role {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.pill-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #eff6ff;
+    color: #2563eb;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
