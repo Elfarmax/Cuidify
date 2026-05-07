@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Perfil Profesional | CasaCuidadoPro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body
+    id="appBody"
+    style="
+      background: linear-gradient(135deg, #f1f5f9 0%, #e8eef7 100%);
+      min-height: 100vh;
+    "
+  >
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        <span>CasaCuidadoPro</span>
+      </div>
+      <div style="display: flex; gap: 15px; align-items: center">
+        <span id="auth-section"></span>
+
+        <select
+          class="theme-selector-pro"
+          onchange="applyTheme(this.value)"
+          style="padding: 8px 15px"
+        >
+          <option value="normal">👁️ Estándar</option>
+          <option value="protanopia">🎨 Daltonismo</option>
+          <option value="high-contrast">🌓 Alto Contraste</option>
+        </select>
+      </div>
+    </header>
+
+    <main
+      style="
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        margin-bottom: 60px;
+      "
+    >
+      <!-- MODO VISTA -->
+      <div id="view-mode">
+        <!-- HEADER PROFESIONAL -->
+        <div class="professional-profile-header">
+          <div class="profile-banner"></div>
+          <div class="profile-header-flex">
+            <div class="avatar-section">
+              <div class="avatar-large-pro" id="avatar-char">M</div>
+              <div class="verification-badge">✅ Verificado</div>
+            </div>
+            <div class="profile-info-section">
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: space-between;
+                "
+              >
+                <div>
+                  <h1 id="display-name" class="profile-name">Cargando...</h1>
+                  <p id="display-role" class="profile-role">
+                    Trabajador Profesional
+                  </p>
+                  <p id="display-location" class="profile-location">
+                    📍 Madrid, España
+                  </p>
+                </div>
+                <button
+                  class="btn-primary"
+                  onclick="toggleEditMode()"
+                  style="padding: 12px 24px; font-weight: 600"
+                >
+                  ✏️ Editar Perfil
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ESTADÍSTICAS -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number">⭐ 4.9</div>
+              <div class="stat-label">Puntuación</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">📋 48</div>
+              <div class="stat-label">Trabajos Realizados</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">😊 45</div>
+              <div class="stat-label">Clientes Satisfechos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">🔥 98%</div>
+              <div class="stat-label">Tasa de Éxito</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFORMACIÓN PRINCIPAL -->
+        <div class="profile-grid-2">
+          <!-- COLUMNA 1 -->
+          <div class="profile-column">
+            <!-- SOBRE MÍ -->
+            <div class="profile-card-pro">
+              <h2 class="card-title">👤 Sobre Mí</h2>
+              <p id="display-bio" class="bio-text">
+                Cargando biografía profesional...
+              </p>
+              <div class="contact-info">
+                <a href="mailto:" id="display-email" class="contact-link"
+                  >📧 correo@ejemplo.com</a
+                >
+                <a href="tel:" id="display-phone-link" class="contact-link"
+                  >📱 +34 000 000 000</a
+                >
+              </div>
+            </div>
+
+            <!-- TARIFA Y DISPONIBILIDAD -->
+            <div class="profile-card-pro">
+              <h2 class="card-title">💰 Tarifa y Disponibilidad</h2>
+              <div class="price-box">
+                <span class="price-label">Tarifa Horaria:</span>
+                <span class="price-value" id="display-precio">15€/hora</span>
+              </div>
+              <div style="margin-top: 20px">
+                <p class="section-subtitle">Horario de Disponibilidad:</p>
+                <p id="display-horario" class="availability-text">
+                  Lunes a Viernes, 9:00 - 18:00
+                </p>
+              </div>
+            </div>
+
+            <!-- HABILIDADES -->
+            <div class="profile-card-pro">
+              <div class="card-header-flex">
+                <h2 class="card-title">🎯 Especialidades</h2>
+                <button class="btn-small" onclick="toggleSkillsMenu()">
+                  + Añadir
+                </button>
+              </div>
+              <div
+                id="skills-edit-panel"
+                style="
+                  display: none;
+                  margin-bottom: 15px;
+                  padding: 15px;
+                  background: #f8fafc;
+                  border-radius: 8px;
+                "
+              >
+                <input
+                  type="text"
+                  id="input-skill-name"
+                  placeholder="Ej: Cocina, Limpieza profunda..."
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 6px;
+                    margin-bottom: 10px;
+                  "
+                />
+                <button
+                  type="button"
+                  class="btn-primary"
+                  onclick="addSkill()"
+                  style="width: 100%; padding: 10px"
+                >
+                  Añadir Especialidad
+                </button>
+              </div>
+              <div id="skills-container" class="skills-display">
+                <p class="empty-state">No hay especialidades añadidas</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUMNA 2 -->
+          <div class="profile-column">
+            <!-- CERTIFICACIONES -->
+            <div class="profile-card-pro">
+              <h2 class="card-title">🎓 Certificaciones Profesionales</h2>
+              <div style="margin-bottom: 15px">
+                <select
+                  id="select-cert-oficial"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 6px;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <option value="">Seleccione certificación...</option>
+                  <optgroup label="🍳 Cocina">
+                    <option value="Carnet de Manipulador de Alimentos">
+                      Manipulador de Alimentos
+                    </option>
+                    <option value="Cocina Profesional">
+                      Técnico en Cocina Profesional
+                    </option>
+                    <option value="Especialista en Repostería">
+                      Especialista en Repostería
+                    </option>
+                  </optgroup>
+                  <optgroup label="🧹 Limpieza">
+                    <option value="Certificado en Limpieza">
+                      Especialista en Limpieza
+                    </option>
+                    <option value="Desinfección Profesional">
+                      Desinfección Profesional
+                    </option>
+                    <option value="Experto en Organización">
+                      Experto en Organización
+                    </option>
+                  </optgroup>
+                  <optgroup label="👵 Cuidado">
+                    <option value="TCAE">Auxiliar de Enfermería</option>
+                    <option value="Cuidador Personas Dependientes">
+                      Cuidador de Personas
+                    </option>
+                    <option value="Monitor Infantil">
+                      Técnico en Educación Infantil
+                    </option>
+                  </optgroup>
+                </select>
+                <button
+                  class="btn-primary"
+                  onclick="addCertificate('select')"
+                  style="width: 100%; padding: 10px"
+                >
+                  Añadir Certificación
+                </button>
+              </div>
+              <div id="selected-certs-container" class="certs-display">
+                <p class="empty-state">
+                  Añade tus certificaciones profesionales
+                </p>
+              </div>
+            </div>
+
+            <!-- EQUIPAMIENTO -->
+            <div class="profile-card-pro">
+              <h2 class="card-title">🛠️ Equipamiento</h2>
+              <div style="margin-bottom: 15px">
+                <input
+                  type="text"
+                  id="input-equipo-libre"
+                  placeholder="Ej: Aspiradora Dyson, Thermomix..."
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 6px;
+                    margin-bottom: 10px;
+                  "
+                />
+                <button
+                  class="btn-primary"
+                  onclick="addEquipo()"
+                  style="width: 100%; padding: 10px"
+                >
+                  Añadir Equipo
+                </button>
+              </div>
+              <div id="selected-equipo-container" class="items-display">
+                <p class="empty-state">Añade tu equipamiento</p>
+              </div>
+            </div>
+
+            <!-- RESEÑAS -->
+            <div class="profile-card-pro">
+              <h2 class="card-title">💬 Últimas Reseñas</h2>
+              <div class="reviews-container">
+                <div class="review-item">
+                  <div class="review-header">
+                    <p class="review-author">María García</p>
+                    <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                  </div>
+                  <p class="review-text">
+                    "Excelente profesional y muy responsable. Recomendado 100%"
+                  </p>
+                  <span class="review-date">Hace 2 semanas</span>
+                </div>
+                <div class="review-item">
+                  <div class="review-header">
+                    <p class="review-author">Juan López</p>
+                    <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                  </div>
+                  <p class="review-text">
+                    "Muy profesional y cuidadoso con el trabajo. Perfecto."
+                  </p>
+                  <span class="review-date">Hace 1 mes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODO EDICIÓN -->
+      <div id="edit-mode" style="display: none">
+        <div class="profile-card-pro" style="max-width: 600px; margin: 0 auto">
+          <h2 style="margin-bottom: 30px; font-size: 1.8rem">
+            ⚙️ Editar Mi Perfil Profesional
+          </h2>
+          <form id="form-edit-profile">
+            <!-- Datos Básicos -->
+            <div style="margin-bottom: 30px">
+              <h3 style="margin-bottom: 15px; color: #475569">
+                Información Básica
+              </h3>
+              <div class="form-grid-2col">
+                <div class="form-group">
+                  <label style="font-weight: 600">Nombre</label>
+                  <input
+                    type="text"
+                    id="edit-nombre"
+                    style="
+                      width: 100%;
+                      padding: 10px;
+                      border: 1px solid #e2e8f0;
+                      border-radius: 6px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label style="font-weight: 600">Apellidos</label>
+                  <input
+                    type="text"
+                    id="edit-apellidos"
+                    style="
+                      width: 100%;
+                      padding: 10px;
+                      border: 1px solid #e2e8f0;
+                      border-radius: 6px;
+                    "
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label style="font-weight: 600">Biografía Profesional</label>
+                <textarea
+                  id="edit-bio"
+                  rows="4"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 6px;
+                  "
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Contacto y Tarifa -->
+            <div style="margin-bottom: 30px">
+              <h3 style="margin-bottom: 15px; color: #475569">
+                Contacto y Tarifa
+              </h3>
+              <div class="form-grid-2col">
+                <div class="form-group">
+                  <label style="font-weight: 600">Teléfono</label>
+                  <input
+                    type="text"
+                    id="edit-phone"
+                    placeholder="+34..."
+                    style="
+                      width: 100%;
+                      padding: 10px;
+                      border: 1px solid #e2e8f0;
+                      border-radius: 6px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label style="font-weight: 600">Tarifa (€/hora)</label>
+                  <input
+                    type="number"
+                    id="edit-precio"
+                    style="
+                      width: 100%;
+                      padding: 10px;
+                      border: 1px solid #e2e8f0;
+                      border-radius: 6px;
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Acciones -->
+            <div style="display: flex; gap: 10px">
+              <button
+                type="submit"
+                class="btn-primary"
+                style="flex: 1; padding: 12px; font-weight: 600"
+              >
+                💾 Guardar Cambios
+              </button>
+              <button
+                type="button"
+                class="btn-outline"
+                onclick="toggleEditMode()"
+                style="flex: 1; padding: 12px; font-weight: 600"
+              >
+                ❌ Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/perfil.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

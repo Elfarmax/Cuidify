@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacidad | CasaCuidado Pro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        CasaCuidado<span>Pro</span>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="servicios.html" class="nav-link-unauthenticated">Servicios</a>
+        <a href="registro.html" class="nav-link-unauthenticated"
+          >Ser Cuidador</a
+        >
+        <span id="auth-section">
+          <a href="login.html" class="btn-primary btn-header">Entrar</a>
+        </span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="scroll-content info-section">
+        <div class="section-container">
+          <div style="max-width: 800px; margin: 0 auto 20px; text-align: left">
+            <a
+              href="javascript:history.back()"
+              class="btn-outline"
+              style="padding: 8px 16px; font-size: 0.9rem"
+            >
+              ⬅ Volver
+            </a>
+          </div>
+
+          <div
+            class="profile-card"
+            style="
+              text-align: left;
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 50px;
+            "
+          >
+            <h1
+              style="
+                color: var(--primary);
+                margin-bottom: 20px;
+                font-size: 2.2rem;
+              "
+            >
+              Política de Privacidad
+            </h1>
+            <p style="color: var(--text-muted); margin-bottom: 30px">
+              Última actualización: Abril 2026
+            </p>
+
+            <h3 style="margin: 25px 0 10px; color: var(--text-main)">
+              1. Información que recopilamos
+            </h3>
+            <p style="color: #555; margin-bottom: 15px">
+              En CasaCuidado Pro, la confianza es nuestro pilar. Recopilamos
+              información personal básica (nombre, correo, teléfono) y, en el
+              caso de los cuidadores, datos necesarios para la validación de
+              antecedentes y nuestro sistema de IA Matching.
+            </p>
+
+            <h3 style="margin: 25px 0 10px; color: var(--text-main)">
+              2. Uso de la información
+            </h3>
+            <p style="color: #555; margin-bottom: 15px">
+              Utilizamos tus datos exclusivamente para conectarte con las
+              familias o cuidadores más adecuados, mejorar nuestra plataforma de
+              IA y garantizar un entorno seguro 100%.
+            </p>
+
+            <h3 style="margin: 25px 0 10px; color: var(--text-main)">
+              3. Protección de datos
+            </h3>
+            <p style="color: #555; margin-bottom: 15px">
+              Tus datos están encriptados y almacenados de forma segura. Nunca
+              venderemos tu información a terceros. Puedes solicitar la
+              eliminación de tu cuenta en cualquier momento desde tu panel de
+              usuario o contactando a soporte.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand-side">
+          <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
+
+          <div class="footer-theme-wrap">
+            <select
+              class="theme-selector-pro"
+              onchange="applyTheme(this.value)"
+            >
+              <option value="normal">👁️ Estándar</option>
+              <option value="protanopia">🎨 Daltonismo</option>
+              <option value="high-contrast">🌓 Alto Contraste</option>
+            </select>
+          </div>
+
+          <p class="footer-copyright-text">
+            CasaCuidado Pro © 2026<br />
+            Todos los derechos reservados.
+          </p>
+        </div>
+
+        <div class="footer-nav-side">
+          <div class="footer-nav-col">
+            <h4>Servicio de Cuidados</h4>
+            <nav>
+              <a href="servicios.html">Cuidado de Mayores</a>
+              <a href="servicios.html">Cuidado de Niños</a>
+              <a href="servicios.html">Pers. Dependientes</a>
+              <a href="servicios.html">Cuidado de Mascotas</a>
+            </nav>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4>Otros Servicios</h4>
+            <nav>
+              <a href="servicios.html">Limpiezas y Cocina</a>
+              <a href="servicios.html">Lavandería y Plancha</a>
+              <a href="servicios.html">Jardín y Mantenimiento</a>
+              <a href="servicios.html">Shopping y Recados</a>
+            </nav>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4>Cuidadores</h4>
+            <nav>
+              <a href="sercuidador.html">Ser Cuidador</a>
+              <a href="casacuidadopro-info.html">CasaCuidadoPRO</a>
+              <a href="ayuda.html">Ayuda</a>
+            </nav>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4>Legal</h4>
+            <nav>
+              <a href="privacidad.html">Privacidad</a>
+              <a href="cookies.html">Cookies</a>
+              <a href="aviso-legal.html">Aviso Legal</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

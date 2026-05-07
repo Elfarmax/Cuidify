@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro Profesional | CasaCuidadoPro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        CasaCuidado<span>Pro</span>
+      </div>
+      <div class="auth-buttons">
+        <select
+          class="theme-selector-pro"
+          onchange="applyTheme(this.value)"
+          title="Selector de Accesibilidad"
+          style="margin-right: 10px"
+        >
+          <option value="normal">👁️ Estándar</option>
+          <option value="protanopia">🎨 Daltonismo</option>
+          <option value="high-contrast">🌓 Alto Contraste</option>
+        </select>
+        <a href="index.html" class="btn-outline">Volver al inicio</a>
+      </div>
+    </header>
+
+    <main class="auth-page-wrapper">
+      <div class="register-card-wide">
+        <div class="text-center" style="margin-bottom: 30px">
+          <h2 style="font-size: 2.2rem; font-weight: 800">Crea tu cuenta</h2>
+          <p style="color: var(--text-muted)">
+            Registro oficial con verificación de identidad
+          </p>
+        </div>
+
+        <div class="role-selector">
+          <button type="button" id="tab-worker" class="role-btn active">
+            👤 Soy Cuidador
+          </button>
+          <button type="button" id="tab-employer" class="role-btn">
+            🏠 Busco Cuidados
+          </button>
+        </div>
+
+        <form id="form-register">
+          <div class="form-grid">
+            <h3 class="step-title">Datos de Identidad y Acceso</h3>
+
+            <div class="form-group">
+              <label>Nombre</label>
+              <input
+                type="text"
+                name="nombre"
+                placeholder="Ej: María"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input
+                type="text"
+                name="apellidos"
+                placeholder="Ej: García López"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>DNI / NIE / Pasaporte</label>
+              <input type="text" name="dni" placeholder="12345678X" required />
+            </div>
+
+            <div class="form-group">
+              <label>Teléfono de contacto</label>
+              <input
+                type="tel"
+                name="telefono"
+                placeholder="+34 600 000 000"
+                required
+              />
+            </div>
+
+            <div class="form-group" style="grid-column: span 2">
+              <label>Correo electrónico</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="usuario@correo.com"
+                required
+              />
+            </div>
+
+            <div class="form-group" style="grid-column: span 2">
+              <label>Contraseña</label>
+              <input
+                type="password"
+                name="password_hash"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div id="block-cuidador" class="form-group full">
+              <h3 class="step-title">Información Profesional</h3>
+              <div class="form-group" style="width: 50%; margin-bottom: 20px">
+                <label>Tarifa por hora (€)</label>
+                <input
+                  type="number"
+                  name="precio_hora"
+                  step="0.01"
+                  placeholder="12.50"
+                />
+              </div>
+              <label>Biografía y Experiencia</label>
+              <textarea
+                name="bio"
+                rows="4"
+                placeholder="Cuéntanos tu trayectoria..."
+              ></textarea>
+            </div>
+
+            <div
+              id="block-familia"
+              class="form-group full"
+              style="display: none"
+            >
+              <h3 class="step-title">Información del Servicio</h3>
+              <div class="form-group full">
+                <label>¿Para quién solicitas el cuidado?</label>
+                <select id="select-target" name="target">
+                  <option value="self">Para mí mismo/a</option>
+                  <option value="other">
+                    Para un familiar (Padres, hijos, etc.)
+                  </option>
+                </select>
+              </div>
+
+              <div id="box-third-party" class="sliding-form-block">
+                <div
+                  class="form-grid"
+                  style="
+                    background: var(--bg-light);
+                    padding: 20px;
+                    border-radius: var(--radius-md);
+                    margin-top: 15px;
+                  "
+                >
+                  <div class="form-group">
+                    <label>Nombre del familiar</label>
+                    <input
+                      type="text"
+                      name="nombre_familiar"
+                      placeholder="Nombre completo"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Parentesco</label>
+                    <input
+                      type="text"
+                      name="parentesco"
+                      placeholder="Ej: Madre, Abuelo..."
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Edad</label>
+                    <input
+                      type="number"
+                      name="edad_familiar"
+                      placeholder="Años"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Ubicación</label>
+                    <input
+                      type="text"
+                      name="ubicacion"
+                      placeholder="Ciudad o zona"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 30px">
+            <button type="submit" class="btn-primary full">
+              Completar Registro Profesional
+            </button>
+          </div>
+        </form>
+
+        <div class="text-center" style="margin-top: 20px; font-size: 0.9rem">
+          ¿Ya tienes cuenta?
+          <a
+            href="login.html"
+            style="
+              color: var(--primary);
+              font-weight: 700;
+              text-decoration: none;
+            "
+            >Inicia sesión aquí</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/registro.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

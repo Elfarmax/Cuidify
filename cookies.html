@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Cookies | CasaCuidado Pro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        CasaCuidado<span>Pro</span>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="servicios.html" class="nav-link-unauthenticated">Servicios</a>
+        <a href="registro.html" class="nav-link-unauthenticated"
+          >Ser Cuidador</a
+        >
+        <span id="auth-section">
+          <a href="login.html" class="btn-primary btn-header">Entrar</a>
+        </span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="scroll-content valoraciones-bg">
+        <div class="section-container">
+          <div style="max-width: 800px; margin: 0 auto 20px; text-align: left">
+            <a
+              href="javascript:history.back()"
+              class="btn-outline"
+              style="padding: 8px 16px; font-size: 0.9rem"
+            >
+              ⬅ Volver
+            </a>
+          </div>
+
+          <div
+            class="profile-card"
+            style="
+              text-align: left;
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 50px;
+            "
+          >
+            <h1
+              style="
+                color: var(--primary);
+                margin-bottom: 20px;
+                font-size: 2.2rem;
+              "
+            >
+              Política de Cookies
+            </h1>
+
+            <p style="color: #555; margin-bottom: 25px; font-size: 1.1rem">
+              En CasaCuidado Pro utilizamos cookies para mejorar tu navegación y
+              personalizar tu experiencia según tus preferencias.
+            </p>
+
+            <div class="features-mini-grid" style="margin-top: 30px">
+              <div
+                class="f-item"
+                style="padding: 25px; text-align: left; align-items: flex-start"
+              >
+                <h4 style="color: var(--primary)">🍪 Cookies Técnicas</h4>
+                <p style="font-size: 0.9rem; color: #555">
+                  Son esenciales para que la web funcione. Permiten el inicio de
+                  sesión seguro y el uso del selector de accesibilidad.
+                </p>
+              </div>
+
+              <div
+                class="f-item"
+                style="padding: 25px; text-align: left; align-items: flex-start"
+              >
+                <h4 style="color: var(--primary)">📊 Cookies de Análisis</h4>
+                <p style="font-size: 0.9rem; color: #555">
+                  Nos ayudan a medir cuántas personas visitan la web y qué
+                  secciones son las más útiles para mejorar el servicio.
+                </p>
+              </div>
+            </div>
+
+            <h3 style="margin: 35px 0 15px; color: var(--text-main)">
+              ¿Cómo puedo gestionar las cookies?
+            </h3>
+            <p style="color: #555">
+              Puedes restringir, bloquear o borrar las cookies de este sitio web
+              en cualquier momento modificando la configuración de tu navegador.
+              Si desactivas las cookies, es posible que algunas funciones de la
+              plataforma no estén disponibles.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand-side">
+          <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
+          <div class="footer-theme-wrap">
+            <select
+              class="theme-selector-pro"
+              onchange="applyTheme(this.value)"
+            >
+              <option value="normal">👁️ Estándar</option>
+              <option value="protanopia">🎨 Daltonismo</option>
+              <option value="high-contrast">🌓 Alto Contraste</option>
+            </select>
+          </div>
+          <p class="footer-copyright-text">
+            CasaCuidado Pro © 2026<br />Todos los derechos reservados.
+          </p>
+        </div>
+
+        <div class="footer-nav-side">
+          <div class="footer-nav-col">
+            <h4>Servicio de Cuidados</h4>
+            <nav>
+              <a href="sercuidador.html">Ser Cuidador</a>
+              <a href="casacuidadopro-info.html">CasaCuidadoPRO</a>
+              <a href="ayuda.html">Ayuda y Soporte</a>
+            </nav>
+          </div>
+          <div class="footer-nav-col">
+            <h4>Legal</h4>
+            <nav>
+              <a href="privacidad.html">Privacidad</a>
+              <a href="cookies.html">Cookies</a>
+              <a href="aviso-legal.html">Aviso Legal</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

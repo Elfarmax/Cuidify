@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayuda | CasaCuidado Pro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        CasaCuidado<span>Pro</span>
+      </div>
+      <nav class="nav-menu">
+        <a href="servicios.html">Servicios</a>
+        <a href="registro.html">Ser Cuidador</a>
+        <span id="auth-section"
+          ><a href="login.html" class="btn-primary btn-header">Entrar</a></span
+        >
+      </nav>
+    </header>
+
+    <main>
+      <div style="background: var(--bg-section); padding: 15px 0 0 0">
+        <div class="section-container" style="text-align: left">
+          <a
+            href="javascript:history.back()"
+            class="btn-outline"
+            style="
+              padding: 8px 16px;
+              font-size: 0.85rem;
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            ⬅ Volver
+          </a>
+        </div>
+      </div>
+
+      <section
+        class="hero-clean"
+        style="height: auto; padding: 40px 0; background: var(--bg-section)"
+      >
+        <div class="hero-content">
+          <h1 style="margin-bottom: 10px">Centro de <span>Ayuda</span></h1>
+          <p>Todo lo que necesitas saber sobre CasaCuidado Pro.</p>
+        </div>
+      </section>
+
+      <section class="scroll-content" style="padding-top: 20px">
+        <div class="section-container">
+          <div class="features-mini-grid">
+            <div
+              class="f-item"
+              style="text-align: left; align-items: flex-start"
+            >
+              <h4>¿Cómo eligen a los cuidadores?</h4>
+              <p>
+                Pasamos por un proceso de 3 fases: validación de documentos
+                legales, pruebas psicotécnicas y una entrevista personal.
+              </p>
+            </div>
+            <div
+              class="f-item"
+              style="text-align: left; align-items: flex-start"
+            >
+              <h4>¿Es seguro el pago online?</h4>
+              <p>
+                Usamos pasarelas de pago encriptadas. El dinero no se libera al
+                cuidador hasta que el servicio se confirma como realizado.
+              </p>
+            </div>
+            <div
+              class="f-item"
+              style="text-align: left; align-items: flex-start"
+            >
+              <h4>¿Puedo cambiar de cuidador?</h4>
+              <p>
+                Sí, si el "matching" inicial no te convence, nuestro soporte te
+                ayudará a encontrar un nuevo perfil sin coste adicional.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="profile-card"
+            style="margin-top: 40px; text-align: center"
+          >
+            <h3>¿Aún tienes dudas?</h3>
+            <p>Escríbenos y te responderemos en menos de 24 horas.</p>
+            <br />
+            <a href="mailto:soporte@casacuidadopro.com" class="btn-primary"
+              >Contactar con Soporte</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand-side">
+          <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
+          <div class="footer-theme-wrap">
+            <select
+              class="theme-selector-pro"
+              onchange="applyTheme(this.value)"
+            >
+              <option value="normal">👁️ Estándar</option>
+              <option value="protanopia">🎨 Daltonismo</option>
+              <option value="high-contrast">🌓 Alto Contraste</option>
+            </select>
+          </div>
+          <p class="footer-copyright-text">
+            CasaCuidado Pro © 2026<br />Todos los derechos reservados.
+          </p>
+        </div>
+
+        <div class="footer-nav-side">
+          <div class="footer-nav-col">
+            <h4>Servicio de Cuidados</h4>
+            <nav>
+              <a href="servicios.html">Cuidado de Mayores</a>
+              <a href="servicios.html">Cuidado de Niños</a>
+              <a href="servicios.html">Pers. Dependientes</a>
+            </nav>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4>Cuidadores</h4>
+            <nav>
+              <a href="sercuidador.html">Ser Cuidador</a>
+              <a href="casacuidadopro-info.html">CasaCuidadoPRO</a>
+              <a href="ayuda.html">Ayuda</a>
+            </nav>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4>Legal</h4>
+            <nav>
+              <a href="privacidad.html">Privacidad</a>
+              <a href="cookies.html">Cookies</a>
+              <a href="aviso-legal.html">Aviso Legal</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

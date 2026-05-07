@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Accesibilidad - Daltonismo</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body.protanopia {
+        filter: saturate(1.5) hue-rotate(20deg) brightness(1.1);
+      }
+      body.achromatopsia {
+        filter: grayscale(100%) contrast(1.2);
+      }
+      body.high-contrast {
+        --bg-light: #000000;
+        --bg-section: #1a1a1a;
+        --text-main: #00ff00;
+        --text-muted: #00ff00;
+        --primary: #ffff00;
+        --primary-hover: #ffff00;
+        --primary-light: #1a1a00;
+        --white: #000000;
+        --border: #00ff00;
+        filter: contrast(1.5);
+      }
+      .test-container {
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .test-box {
+        background: var(--primary-light);
+        border: 2px solid var(--primary);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        color: var(--text-main);
+      }
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 20px 0;
+      }
+      .color-box {
+        height: 100px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+  </head>
+  <body id="appBody">
+    <header
+      style="
+        padding: 20px;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      "
+    >
+      <h1 style="color: var(--primary)">Test de Accesibilidad</h1>
+      <select
+        class="theme-selector-pro"
+        onchange="applyTheme(this.value)"
+        title="Selector de Accesibilidad"
+      >
+        <option value="normal">👁️ Estándar</option>
+        <option value="protanopia">🎨 Daltonismo (Protanopia)</option>
+        <option value="achromatopsia">⚫ Escala de Grises</option>
+        <option value="high-contrast">🌓 Alto Contraste</option>
+      </select>
+    </header>
+
+    <div class="test-container">
+      <div class="test-box">
+        <h2>Selector de Accesibilidad Funcional</h2>
+        <p>
+          Usa el selector arriba para cambiar entre los diferentes modos de
+          accesibilidad.
+        </p>
+        <p>
+          <strong>Modo actual:</strong> <span id="modoActual">Estándar</span>
+        </p>
+      </div>
+
+      <div class="test-box">
+        <h3>Prueba de Colores</h3>
+        <div class="color-grid">
+          <div class="color-box" style="background-color: #6e8efb">Azul</div>
+          <div class="color-box" style="background-color: #ff6b6b">Rojo</div>
+          <div class="color-box" style="background-color: #51cf66">Verde</div>
+          <div class="color-box" style="background-color: #ffd43b; color: #000">
+            Amarillo
+          </div>
+        </div>
+      </div>
+
+      <div class="test-box">
+        <h3>Texto Ejemplo</h3>
+        <p>
+          Este es un texto de ejemplo para verificar que los cambios de
+          contraste y escala de grises están funcionando correctamente. Intenta
+          cambiar los modos de accesibilidad para ver cómo cambia el texto y los
+          colores.
+        </p>
+      </div>
+
+      <div class="test-box" style="text-align: center">
+        <p>
+          <strong style="font-size: 1.2em"
+            >Si ves cambios en los colores y contraste, ¡El sistema funciona!
+            ✅</strong
+          >
+        </p>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+      // Actualizar el indicador de modo actual
+      function updateModoActual() {
+        const modos = {
+          normal: "Estándar",
+          protanopia: "Daltonismo (Protanopia)",
+          achromatopsia: "Escala de Grises",
+          "high-contrast": "Alto Contraste",
+        };
+        const body = document.getElementById("appBody");
+        let modo = "normal";
+        for (let clase of body.classList) {
+          if (modos[clase]) {
+            modo = clase;
+            break;
+          }
+        }
+        document.getElementById("modoActual").textContent = modos[modo];
+      }
+
+      // Ejecutar cuando el DOM esté listo
+      document.addEventListener("DOMContentLoaded", updateModoActual);
+
+      // Monitorear cambios
+      const observer = new MutationObserver(updateModoActual);
+      observer.observe(document.getElementById("appBody"), {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+    </script>
+  </body>
+</html>
