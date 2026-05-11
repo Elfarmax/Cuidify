@@ -65,70 +65,69 @@
     </header>
 
     <main
-      class="section-container"
-      style="max-width: 900px; margin-top: 40px; margin-bottom: 60px"
+      class="section-container messages-page"
+      style="max-width: 1200px; margin-top: 40px; margin-bottom: 60px"
     >
-      <div class="profile-card">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-          "
-        >
-          <h1 style="font-size: 2rem; margin: 0">💬 Mensajes</h1>
-        </div>
+      <div class="messages-grid">
+        <aside class="messages-sidebar">
+          <div class="messages-sidebar-header">
+            <div>
+              <h1>💬 Mensajes</h1>
+              <p class="text-muted">
+                Negocia y responde directamente desde tu bandeja de
+                conversaciones.
+              </p>
+            </div>
+          </div>
 
-        <!-- Filtros -->
-        <div
-          style="display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap"
-        >
-          <button
-            class="btn-primary"
-            onclick="filterMessages('todos')"
-            id="filter-todos"
-          >
-            Todos (0)
-          </button>
-          <button
-            class="btn-outline"
-            onclick="filterMessages('noLeidos')"
-            id="filter-noLeidos"
-          >
-            Sin Leer (0)
-          </button>
-          <button
-            class="btn-outline"
-            onclick="filterMessages('archivados')"
-            id="filter-archivados"
-          >
-            Archivados (0)
-          </button>
-        </div>
+          <div class="messages-actions">
+            <div class="messages-filters">
+              <button
+                class="btn-primary btn-small full"
+                onclick="filterMessages('todos')"
+                id="filter-todos"
+              >
+                Todos (0)
+              </button>
+              <button
+                class="btn-outline btn-small full"
+                onclick="filterMessages('noLeidos')"
+                id="filter-noLeidos"
+              >
+                Sin Leer (0)
+              </button>
+              <button
+                class="btn-outline btn-small full"
+                onclick="filterMessages('archivados')"
+                id="filter-archivados"
+              >
+                Archivados (0)
+              </button>
+            </div>
 
-        <!-- Lista de Mensajes -->
-        <div
-          id="mensajes-lista"
-          style="display: flex; flex-direction: column; gap: 15px"
-        >
-          <div style="text-align: center; color: #999; padding: 40px 20px">
-            <p style="font-size: 1.1rem">📭 No hay mensajes aún</p>
-            <p style="font-size: 0.9rem; margin-top: 10px">
-              Tus mensajes aparecerán aquí cuando recibas contactos
+            <div class="messages-search">
+              <input
+                type="text"
+                id="search-messages"
+                placeholder="Buscar remitente, asunto o texto..."
+              />
+            </div>
+          </div>
+
+          <div id="mensajes-lista" class="messages-list"></div>
+        </aside>
+
+        <section class="messages-detail" id="message-detail">
+          <div class="message-detail-empty">
+            <h2>Selecciona un mensaje para comenzar a negociar</h2>
+            <p class="text-muted">
+              Cuando pulses en un mensaje, aquí podrás ver la conversación y
+              responder.
             </p>
           </div>
-        </div>
+        </section>
       </div>
     </main>
-
-    <!-- Modal para ver mensaje completo -->
-    <div id="mensajeModal" class="modal" style="display: none">
-      <div class="modal-content" style="max-width: 500px">
-        <span class="close" onclick="cerrarMensajeModal()">&times;</span>
-        <div id="modal-mensaje-contenido"></div>
-      </div>
-    </div>
 
     <footer class="main-footer">
       <div class="footer-container">

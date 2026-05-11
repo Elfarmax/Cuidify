@@ -231,8 +231,6 @@ function buildProfileCard(p) {
   const infoExtra = `
         <div class="detalles-perfil-tarjeta">
             ${p.formacion ? `<p><span>🎓</span> <b>Formación:</b> ${p.formacion}</p>` : ""}
-            ${p.equipamiento ? `<p><span>🛠️</span> <b>Equipamiento:</b> ${p.equipamiento}</p>` : ""}
-            ${p.logistica ? `<p><span>🚗</span> <b>Logística:</b> ${p.logistica}</p>` : ""}
         </div>
     `;
 
@@ -244,7 +242,7 @@ function buildProfileCard(p) {
                 <p class="txt-precio">Tarifa: <b>${p.precio}</b></p>
                 <p class="txt-rating">Valoración: ${p.rating}</p>
                 ${infoExtra}
-                <button class="btn-contacto-lista">Contactar</button>
+                <button class="btn-contacto-lista" data-profesional-nombre="${p.nombre}">Contactar</button>
             </div>
         </div>
     `;
@@ -297,9 +295,62 @@ function initCategoryFilter() {
   });
 }
 
+function setupContactButtons() {
+  if (!contenedor) return;
+
+  contenedor.addEventListener("click", (event) => {
+    const button = event.target.closest(".btn-contacto-lista");
+    if (!button) return;
+
+    event.stopPropagation();
+    const nombre = button.dataset.profesionalNombre?.trim();
+    if (!nombre) return;
+
+    contactProfessional(nombre);
+  });
+}
+
+function contactProfessional(nombre) {
+  const userSession = JSON.parse(localStorage.getItem("usuario_sesion"));
+  if (!userSession) {
+    alert("⚠️ Debes iniciar sesión para contactar con un profesional.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  const mensajes = JSON.parse(localStorage.getItem("mensajes_usuario")) || [];
+  const existing = mensajes.find((m) => m.remitente === nombre);
+
+  if (existing) {
+    localStorage.setItem("mensajes_abrir", String(existing.id));
+    alert(`✅ Ya tienes una conversación con ${nombre}. Te llevo a Mensajes.`);
+    window.location.href = "mensajes.html";
+    return;
+  }
+
+  const nuevoMensaje = {
+    id: Date.now(),
+    remitente: nombre,
+    avatar: nombre.charAt(0).toUpperCase(),
+    asunto: `Interés en tus servicios`,
+    mensaje: "",
+    fecha: new Date().toISOString().split("T")[0],
+    leido: false,
+    archivado: false,
+    respuestas: [],
+  };
+
+  mensajes.push(nuevoMensaje);
+  localStorage.setItem("mensajes_usuario", JSON.stringify(mensajes));
+  localStorage.setItem("mensajes_abrir", String(nuevoMensaje.id));
+  alert(`✅ Has contactado a ${nombre}. Te llevo a Mensajes.`);
+  window.location.href = "mensajes.html";
+}
+
 if (!contenedor) {
   console.warn("Contenedor de lista no encontrado");
 } else {
   initCategoryFilter();
   renderService(servicioElegido);
+  setupContactButtons();
 }

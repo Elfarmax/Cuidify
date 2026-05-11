@@ -9,16 +9,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // Cargar mensajes del localStorage
   loadMessages();
 
-  // Event listeners para los filtros
-  document.getElementById("max-distance").addEventListener("input", (e) => {
-    document.getElementById("distance-value").textContent =
-      e.target.value + " km";
-  });
+  const searchInput = document.getElementById("search-messages");
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value;
+      const mensajes =
+        JSON.parse(localStorage.getItem("mensajes_usuario")) || mensajesEjemplo;
+      renderMessages(mensajes, currentFilter, currentSearch);
+    });
+  }
 
-  document.getElementById("min-salary").addEventListener("input", (e) => {
-    document.getElementById("salary-value").textContent =
-      e.target.value + "€/hora";
-  });
+  filterMessages(currentFilter);
+
+  const mensajeAbrirId = localStorage.getItem("mensajes_abrir");
+  if (mensajeAbrirId) {
+    openMessage(Number(mensajeAbrirId));
+    localStorage.removeItem("mensajes_abrir");
+  }
 });
 
 // Simulamos una lista de mensajes de ejemplo
@@ -33,6 +40,7 @@ const mensajesEjemplo = [
     fecha: "2024-04-05",
     leido: false,
     archivado: false,
+    respuestas: [],
   },
   {
     id: 2,
@@ -44,6 +52,7 @@ const mensajesEjemplo = [
     fecha: "2024-04-04",
     leido: true,
     archivado: false,
+    respuestas: [],
   },
   {
     id: 3,
@@ -55,78 +64,81 @@ const mensajesEjemplo = [
     fecha: "2024-04-03",
     leido: true,
     archivado: false,
+    respuestas: [],
   },
 ];
 
+let selectedMessageId = null;
+let currentFilter = "todos";
+let currentSearch = "";
+
 function loadMessages() {
-  // Obtener mensajes del localStorage o usar los de ejemplo
   let mensajes =
     JSON.parse(localStorage.getItem("mensajes_usuario")) || mensajesEjemplo;
 
-  // Guardar los mensajes de ejemplo si no existen
   if (!localStorage.getItem("mensajes_usuario")) {
     localStorage.setItem("mensajes_usuario", JSON.stringify(mensajesEjemplo));
   }
 
-  renderMessages(mensajes, "todos");
+  renderMessages(mensajes, currentFilter, currentSearch);
   updateFilterCounts(mensajes);
+  return mensajes;
 }
 
-function renderMessages(mensajes, filtro) {
+function renderMessages(mensajes, filtro = "todos", search = "") {
   const lista = document.getElementById("mensajes-lista");
+  let mensajesFiltrados = mensajes.slice();
 
-  // Filtrar según el criterio
-  let mensajesFiltrados = mensajes;
   if (filtro === "noLeidos") {
-    mensajesFiltrados = mensajes.filter((m) => !m.leido);
+    mensajesFiltrados = mensajesFiltrados.filter((m) => !m.leido);
   } else if (filtro === "archivados") {
-    mensajesFiltrados = mensajes.filter((m) => m.archivado);
+    mensajesFiltrados = mensajesFiltrados.filter((m) => m.archivado);
+  }
+
+  if (search.trim()) {
+    const query = search.trim().toLowerCase();
+    mensajesFiltrados = mensajesFiltrados.filter(
+      (m) =>
+        m.remitente.toLowerCase().includes(query) ||
+        m.asunto.toLowerCase().includes(query) ||
+        m.mensaje.toLowerCase().includes(query),
+    );
   }
 
   if (mensajesFiltrados.length === 0) {
     lista.innerHTML = `
-      <div style="text-align: center; color: #999; padding: 40px 20px;">
-        <p style="font-size: 1.1rem;">📭 No hay mensajes</p>
+      <div class="message-empty-state">
+        <p class="message-empty-title">📭 No hay mensajes</p>
+        <p class="message-empty-text">Aún no tienes conversaciones que mostrar. Usa el botón de contactar para crear una nueva negociación.</p>
       </div>
     `;
     return;
   }
 
   lista.innerHTML = mensajesFiltrados
-    .map(
-      (mensaje) => `
-    <div onclick="openMessage(${mensaje.id})" 
-         style="padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; background: ${!mensaje.leido ? "#f0f4ff" : "#fff"};"
-         onmouseover="this.style.backgroundColor='#fafbfc'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'"
-         onmouseout="this.style.backgroundColor='${!mensaje.leido ? "#f0f4ff" : "#fff"}'; this.style.boxShadow='none'">
-      
-      <div style="display: flex; gap: 15px; align-items: flex-start;">
-        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #6e8efb, #5a75e6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; flex-shrink: 0;">
-          ${mensaje.avatar}
-        </div>
-        
-        <div style="flex: 1; min-width: 0;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-            <h3 style="margin: 0; font-weight: ${!mensaje.leido ? "700" : "600"}; color: var(--text-main);">
-              ${mensaje.remitente}
-              ${!mensaje.leido ? '<span style="color: #2563eb; font-size: 0.8rem; margin-left: 8px;">● Nuevo</span>' : ""}
-            </h3>
-            <span style="color: #999; font-size: 0.85rem;">${formatDate(mensaje.fecha)}</span>
-          </div>
-          <p style="margin: 8px 0; font-weight: 500; color: var(--text-main);">${mensaje.asunto}</p>
-          <p style="margin: 0; color: #666; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-            ${mensaje.mensaje}
-          </p>
-        </div>
+    .map((mensaje) => {
+      const isSelected = selectedMessageId === mensaje.id;
+      const cardState = mensaje.leido ? "" : "message-card-new";
+      const cardSelected = isSelected ? "message-card-selected" : "";
 
-        <div style="display: flex; gap: 8px; flex-shrink: 0;">
-          ${!mensaje.archivado ? `<button onclick="archiveMessage(event, ${mensaje.id})" class="btn-outline" style="padding: 6px 12px; font-size: 0.8rem;">📦 Archivar</button>` : ""}
-          <button onclick="deleteMessage(event, ${mensaje.id})" class="btn-outline" style="padding: 6px 12px; font-size: 0.8rem; color: #ff6b6b;">🗑️ Eliminar</button>
+      return `
+        <div class="message-card ${cardState} ${cardSelected}" onclick="openMessage(${mensaje.id})">
+          <div class="message-card-avatar">${mensaje.avatar}</div>
+          <div class="message-card-meta">
+            <div class="message-card-title">
+              <strong>${mensaje.remitente}</strong>
+              <span class="message-card-time">${formatDate(mensaje.fecha)}</span>
+            </div>
+            <p class="message-card-subject">${mensaje.asunto}</p>
+            <p class="message-card-preview">${mensaje.mensaje || (mensaje.respuestas && mensaje.respuestas.length > 0 ? mensaje.respuestas[mensaje.respuestas.length - 1].texto : "Pulsa para escribir tu primer mensaje...")}</p>
+          </div>
+          <div class="message-card-actions">
+            ${!mensaje.archivado ? `<button onclick="archiveMessage(event, ${mensaje.id})" class="btn-outline btn-small">📦 Archivar</button>` : ""}
+            <button onclick="deleteMessage(event, ${mensaje.id})" class="btn-outline btn-small btn-danger">🗑️ Eliminar</button>
+          </div>
         </div>
-      </div>
-    </div>
-  `,
-    )
+      `;
+    })
     .join("");
 }
 
@@ -135,49 +147,55 @@ function openMessage(id) {
     JSON.parse(localStorage.getItem("mensajes_usuario")) || mensajesEjemplo;
   const mensaje = mensajes.find((m) => m.id === id);
 
-  if (mensaje) {
-    // Marcar como leído
-    mensaje.leido = true;
-    localStorage.setItem("mensajes_usuario", JSON.stringify(mensajes));
-
-    // Mostrar modal
-    const modal = document.getElementById("mensajeModal");
-    const contenido = document.getElementById("modal-mensaje-contenido");
-
-    contenido.innerHTML = `
-      <div style="text-align: center; margin-bottom: 20px;">
-        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #6e8efb, #5a75e6); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 2rem;">
-          ${mensaje.avatar}
-        </div>
-        <h2 style="margin: 0 0 5px 0; font-size: 1.5rem;">${mensaje.remitente}</h2>
-        <span style="color: #999; font-size: 0.9rem;">${formatDate(mensaje.fecha)}</span>
-      </div>
-
-      <div style="border-bottom: 1px solid #e2e8f0; margin-bottom: 20px; padding-bottom: 15px;">
-        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">${mensaje.asunto}</h3>
-      </div>
-
-      <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px; line-height: 1.6; color: #475569;">
-        ${mensaje.mensaje}
-      </div>
-
-      <div style="display: flex; gap: 10px;">
-        <button onclick="replyMessage(${mensaje.id})" class="btn-primary" style="flex: 1; padding: 12px;">
-          ✉️ Responder
-        </button>
-        <button onclick="cerrarMensajeModal()" class="btn-outline" style="flex: 1; padding: 12px;">
-          Cerrar
-        </button>
-      </div>
-    `;
-
-    modal.style.display = "flex";
-    loadMessages(); // Recargar para actualizar el estado leído
+  if (!mensaje) {
+    return;
   }
+
+  mensaje.leido = true;
+  localStorage.setItem("mensajes_usuario", JSON.stringify(mensajes));
+  selectedMessageId = id;
+
+  renderMessages(mensajes, currentFilter, currentSearch);
+  renderMessageDetail(mensaje);
 }
 
-function cerrarMensajeModal() {
-  document.getElementById("mensajeModal").style.display = "none";
+function renderMessageDetail(mensaje) {
+  const detail = document.getElementById("message-detail");
+  detail.innerHTML = `
+    <div class="chat-panel">
+      <div class="chat-header">
+        <div class="chat-user">
+          <div class="chat-avatar">${mensaje.avatar}</div>
+          <div class="chat-user-details">
+            <h2>${mensaje.remitente}</h2>
+            <p>${mensaje.asunto}</p>
+          </div>
+        </div>
+        <span class="chat-status">${mensaje.archivado ? "Archivado" : mensaje.leido ? "Abierto" : "Nuevo"}</span>
+      </div>
+
+      <div class="chat-history" id="chat-history">
+        ${
+          mensaje.mensaje
+            ? `
+          <div class="chat-bubble incoming">
+            <p>${mensaje.mensaje}</p>
+            <small>${formatDate(mensaje.fecha)}</small>
+          </div>
+        `
+            : ""
+        }
+      </div>
+
+      <div class="chat-compose">
+        <label for="respuesta-text" class="chat-label">Tu mensaje</label>
+        <textarea id="respuesta-text" rows="4" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <button class="btn-primary full" onclick="sendReply(${mensaje.id})">✉️ Enviar respuesta</button>
+      </div>
+    </div>
+  `;
+
+  loadRespuestas(mensaje.id);
 }
 
 function archiveMessage(event, id) {
@@ -189,7 +207,16 @@ function archiveMessage(event, id) {
   if (mensaje) {
     mensaje.archivado = true;
     localStorage.setItem("mensajes_usuario", JSON.stringify(mensajes));
-    loadMessages();
+    if (selectedMessageId === id) {
+      selectedMessageId = null;
+      document.getElementById("message-detail").innerHTML = `
+        <div class="message-detail-empty">
+          <h2>Selecciona un mensaje para continuar</h2>
+          <p class="text-muted">El mensaje archivado ya no se muestra en la vista principal.</p>
+        </div>
+      `;
+    }
+    renderMessages(mensajes, currentFilter, currentSearch);
   }
 }
 
@@ -200,24 +227,35 @@ function deleteMessage(event, id) {
       JSON.parse(localStorage.getItem("mensajes_usuario")) || mensajesEjemplo;
     mensajes = mensajes.filter((m) => m.id !== id);
     localStorage.setItem("mensajes_usuario", JSON.stringify(mensajes));
-    loadMessages();
+    if (selectedMessageId === id) {
+      selectedMessageId = null;
+      document.getElementById("message-detail").innerHTML = `
+        <div class="message-detail-empty">
+          <h2>Selecciona un mensaje para continuar</h2>
+          <p class="text-muted">El mensaje eliminado ya no está disponible.</p>
+        </div>
+      `;
+    }
+    renderMessages(mensajes, currentFilter, currentSearch);
   }
 }
 
 function filterMessages(filtro) {
-  // Actualizar botones activos
+  currentFilter = filtro;
   document.querySelectorAll('[id^="filter-"]').forEach((btn) => {
     btn.classList.remove("btn-primary");
     btn.classList.add("btn-outline");
   });
 
-  document.getElementById(`filter-${filtro}`).classList.add("btn-primary");
-  document.getElementById(`filter-${filtro}`).classList.remove("btn-outline");
+  const activeButton = document.getElementById(`filter-${filtro}`);
+  if (activeButton) {
+    activeButton.classList.add("btn-primary");
+    activeButton.classList.remove("btn-outline");
+  }
 
-  // Cargar y renderizar
   const mensajes =
     JSON.parse(localStorage.getItem("mensajes_usuario")) || mensajesEjemplo;
-  renderMessages(mensajes, filtro);
+  renderMessages(mensajes, currentFilter, currentSearch);
 }
 
 function updateFilterCounts(mensajes) {
@@ -232,15 +270,50 @@ function updateFilterCounts(mensajes) {
     `Archivados (${totalArchivados})`;
 }
 
-function replyMessage(id) {
+function loadRespuestas(messageId) {
   const mensajes =
     JSON.parse(localStorage.getItem("mensajes_usuario")) || mensajesEjemplo;
-  const mensaje = mensajes.find((m) => m.id === id);
+  const mensaje = mensajes.find((m) => m.id === messageId);
+
+  if (mensaje && mensaje.respuestas && mensaje.respuestas.length > 0) {
+    const history = document.getElementById("chat-history");
+    const respuestaHtml = mensaje.respuestas
+      .map(
+        (respuesta) => `
+      <div class="chat-bubble outgoing">
+        <p>${respuesta.texto}</p>
+        <small>${formatDate(respuesta.fecha)}</small>
+      </div>
+    `,
+      )
+      .join("");
+    history.innerHTML += respuestaHtml;
+  }
+}
+
+function sendReply(messageId) {
+  const respuestaText = document.getElementById("respuesta-text").value.trim();
+  if (!respuestaText) {
+    alert("Por favor, escribe un mensaje antes de enviar.");
+    return;
+  }
+
+  const mensajes =
+    JSON.parse(localStorage.getItem("mensajes_usuario")) || mensajesEjemplo;
+  const mensaje = mensajes.find((m) => m.id === messageId);
 
   if (mensaje) {
-    alert(
-      `Respuesta a ${mensaje.remitente}:\n\nFuncionalidad de respuesta próximamente disponible.`,
-    );
+    if (!mensaje.respuestas) mensaje.respuestas = [];
+    mensaje.respuestas.push({
+      texto: respuestaText,
+      fecha: new Date().toISOString().split("T")[0],
+    });
+
+    localStorage.setItem("mensajes_usuario", JSON.stringify(mensajes));
+    renderMessageDetail(mensaje);
+    document.getElementById("respuesta-text").value = "";
+    renderMessages(mensajes, currentFilter, currentSearch);
+    alert("Respuesta enviada correctamente.");
   }
 }
 
@@ -261,11 +334,3 @@ function formatDate(dateString) {
     return date.toLocaleDateString("es-ES", { day: "2-digit", month: "short" });
   }
 }
-
-// Cerrar modal al hacer clic fuera
-window.onclick = (event) => {
-  const modal = document.getElementById("mensajeModal");
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-};

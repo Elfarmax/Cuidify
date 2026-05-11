@@ -9,7 +9,7 @@
 
   <body id="appBody">
     <header>
-      <div class="logo" onclick="window.location.href = 'index.html'">
+      <div class="logo" id="logo-link">
         <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
         CasaCuidado<span>Pro</span>
       </div>
@@ -80,7 +80,7 @@
           <h1 style="font-size: 2rem; margin: 0">✨ IA Ofertas Recomendadas</h1>
           <button
             class="btn-primary"
-            onclick="refreshOffers()"
+            id="refresh-offers-btn"
             style="padding: 10px 20px"
           >
             🔄 Actualizar
@@ -198,7 +198,7 @@
 
         <button
           class="btn-primary"
-          onclick="savePreferences()"
+          id="save-preferences-btn"
           style="margin-top: 20px; padding: 12px 30px"
         >
           💾 Guardar Preferencias
@@ -212,10 +212,7 @@
           <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
 
           <div class="footer-theme-wrap">
-            <select
-              class="theme-selector-pro"
-              onchange="applyTheme(this.value)"
-            >
+            <select class="theme-selector-pro" id="theme-selector">
               <option value="normal">👁️ Estándar</option>
               <option value="protanopia">🎨 Daltonismo</option>
               <option value="high-contrast">🌓 Alto Contraste</option>

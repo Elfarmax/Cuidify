@@ -8,8 +8,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cargar ofertas de IA
   loadIAOffers();
+  setupOfferListListener();
 
-  // Event listeners para preferencias
+  const refreshButton = document.getElementById("refresh-offers-btn");
+  if (refreshButton) {
+    refreshButton.addEventListener("click", refreshOffers);
+  }
+
+  const savePreferencesButton = document.getElementById("save-preferences-btn");
+  if (savePreferencesButton) {
+    savePreferencesButton.addEventListener("click", savePreferences);
+  }
+
+  const themeSelector = document.getElementById("theme-selector");
+  if (themeSelector) {
+    themeSelector.addEventListener("change", (e) => {
+      if (typeof applyTheme === "function") {
+        applyTheme(e.target.value);
+      }
+    });
+  }
+
+  const logoLink = document.getElementById("logo-link");
+  if (logoLink) {
+    logoLink.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  }
+
   document.getElementById("max-distance").addEventListener("input", (e) => {
     document.getElementById("distance-value").textContent =
       e.target.value + " km";
@@ -159,7 +185,7 @@ function renderOffers(ofertas) {
     .sort((a, b) => b.compatibilidad - a.compatibilidad)
     .map(
       (oferta) => `
-      <div onclick="openOfferDetail(${oferta.id})"
+      <div class="offer-card" data-offer-card-id="${oferta.id}"
            style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: #fff; position: relative; overflow: hidden;"
            onmouseover="this.style.boxShadow='0 8px 20px rgba(110, 142, 251, 0.15)'; this.style.transform='translateY(-4px)'"
            onmouseout="this.style.boxShadow='none'; this.style.transform='translateY(0)'">
@@ -201,15 +227,40 @@ function renderOffers(ofertas) {
         </p>
 
         <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
-          <button class="btn-primary" onclick="applyOffer(event, ${oferta.id})" 
+          <button class="btn-primary contact-offer-btn" type="button" data-offer-id="${oferta.id}"
                   style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">
-            ✉️ Solicitar Oferta
+            📞 Contactar
           </button>
         </div>
       </div>
     `,
     )
     .join("");
+}
+
+function setupOfferListListener() {
+  const lista = document.getElementById("ofertas-ia-lista");
+  if (!lista) return;
+
+  lista.addEventListener("click", (event) => {
+    const button = event.target.closest(".contact-offer-btn");
+    if (button) {
+      event.stopPropagation();
+      const ofertaId = Number(button.dataset.offerId);
+      if (!Number.isNaN(ofertaId)) {
+        contactOffer(ofertaId);
+      }
+      return;
+    }
+
+    const card = event.target.closest(".offer-card");
+    if (card && card.dataset.offerCardId) {
+      const ofertaId = Number(card.dataset.offerCardId);
+      if (!Number.isNaN(ofertaId)) {
+        openOfferDetail(ofertaId);
+      }
+    }
+  });
 }
 
 function openOfferDetail(id) {
@@ -236,15 +287,36 @@ Funcionalidad de solicitud próximamente disponible.
   }
 }
 
-function applyOffer(event, id) {
-  event.stopPropagation();
+function contactOffer(id) {
+  console.log("contactOffer called", id);
   const oferta = ofertasIAEjemplo.find((o) => o.id === id);
 
   if (oferta) {
+    const userSession =
+      JSON.parse(localStorage.getItem("usuario_sesion")) || {};
+    let mensajes = JSON.parse(localStorage.getItem("mensajes_usuario")) || [];
+
+    const nuevoMensaje = {
+      id: Date.now(),
+      remitente: oferta.empresa,
+      avatar: oferta.empresa.charAt(0).toUpperCase(),
+      asunto: `Interés en oferta: ${oferta.titulo}`,
+      mensaje: `Hola ${userSession.nombre || "Usuario"}, he visto tu interés en la oferta "${oferta.titulo}". Me gustaría discutir los detalles y disponibilidad. ¿Cuándo podríamos hablar?`,
+      fecha: new Date().toISOString().split("T")[0],
+      leido: false,
+      archivado: false,
+      respuestas: [],
+    };
+
+    mensajes.push(nuevoMensaje);
+    localStorage.setItem("mensajes_usuario", JSON.stringify(mensajes));
+    localStorage.setItem("mensajes_abrir", String(nuevoMensaje.id));
+
+    console.log("contactOffer: mensaje creado", nuevoMensaje);
     alert(
-      `Solicitud enviada para: "${oferta.titulo}"\n\nLa familia se pondrá en contacto con tu perfil próximamente. ¡Buena suerte! 🍀`,
+      "✅ Éxito: el contacto se ha enviado. Te llevo a Mensajes para negociar.",
     );
-    // Aquí se podría guardar la solicitud en localStorage
+    window.location.assign("./mensajes.html");
   }
 }
 
@@ -286,7 +358,7 @@ function loadPreferencesFromStorage() {
     prefs.tiempoCompleto;
 }
 
-function refreshOffers() {
+function refreshOffers(event) {
   // Simular espera de carga
   const btn = event.target;
   const originalText = btn.textContent;
