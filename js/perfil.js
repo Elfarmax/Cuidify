@@ -20,9 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
       user.precio = document.getElementById("edit-precio").value;
 
       localStorage.setItem("usuario_sesion", JSON.stringify(user));
+
       renderProfile(user);
       toggleEditMode();
-      alert("Perfil actualizado correctamente");
+      alert("✅ Perfil actualizado correctamente");
       window.location.reload();
     };
   }
@@ -31,12 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderProfile(user) {
   document.getElementById("display-name").innerText =
     `${user.nombre} ${user.apellidos}`;
+  document.getElementById("display-email").innerText = user.email;
   document.getElementById("display-bio").innerText =
-    user.bio || "Añade una biografia profesional para destacar...";
+    user.bio || "Añade una biografía profesional para destacar...";
 
   const roleElement = document.getElementById("display-role");
   roleElement.innerText =
-    user.role === "cuidador" ? "Profesional de Cuidados" : "Cliente/Familia";
+    user.role === "cuidador"
+      ? "👷 Profesional de Cuidados"
+      : "👨‍👩‍👧 Cliente/Familia";
 
   if (user.nombre) {
     document.getElementById("avatar-char").innerText = user.nombre
@@ -46,19 +50,19 @@ function renderProfile(user) {
 
   const emailLink = document.getElementById("display-email");
   emailLink.href = `mailto:${user.email}`;
-  emailLink.innerText = user.email || "";
+  emailLink.innerText = `📧 ${user.email}`;
 
   const phoneLink = document.getElementById("display-phone-link");
   if (user.telefono) {
     phoneLink.href = `tel:${user.telefono}`;
-    phoneLink.innerText = user.telefono;
+    phoneLink.innerText = `📱 ${user.telefono}`;
   } else {
-    phoneLink.innerText = "Añadir telefono";
+    phoneLink.innerText = "📱 Añadir teléfono";
   }
 
   const precioElement = document.getElementById("display-precio");
   precioElement.innerText = user.precio
-    ? `${user.precio} euros/hora`
+    ? `${user.precio}€/hora`
     : "A consultar";
 
   document.getElementById("edit-nombre").value = user.nombre || "";
@@ -99,8 +103,9 @@ function addSkill() {
     alert("Por favor, ingresa una especialidad");
     return;
   }
+
   if (skillsData.length >= 5) {
-    alert("Maximo 5 especialidades");
+    alert("Máximo 5 especialidades");
     return;
   }
 
@@ -121,17 +126,19 @@ function removeSkill(skill) {
 
 function renderSkills() {
   const container = document.getElementById("skills-container");
+
   if (skillsData.length === 0) {
     container.innerHTML =
       '<p class="empty-state">No hay especialidades añadidas</p>';
     return;
   }
+
   container.innerHTML = skillsData
     .map(
       (skill) => `
     <div style="background: linear-gradient(135deg, #6e8efb, #5a75e6); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
-      ${skill}
-      <button type="button" onclick="removeSkill('${skill}')" class="remove-btn" style="background: rgba(255,255,255,0.3); border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-weight: bold;">x</button>
+      🎯 ${skill}
+      <button type="button" onclick="removeSkill('${skill}')" class="remove-btn" style="background: rgba(255,255,255,0.3); border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s;">✕</button>
     </div>
   `,
     )
@@ -144,6 +151,7 @@ let certificationsData =
 
 function addCertificate(type) {
   let certValue = "";
+
   if (type === "select") {
     const select = document.getElementById("select-cert-oficial");
     certValue = select.value;
@@ -152,15 +160,16 @@ function addCertificate(type) {
     const input = document.getElementById("input-cert-libre");
     certValue = input.value.trim();
     if (!certValue) {
-      alert("Por favor, ingresa una certificacion");
+      alert("Por favor, ingresa una certificación");
       return;
     }
     input.value = "";
   }
 
   if (!certValue) return;
+
   if (certificationsData.length >= 5) {
-    alert("Maximo 5 certificaciones");
+    alert("Máximo 5 certificaciones");
     return;
   }
 
@@ -185,17 +194,19 @@ function removeCertification(cert) {
 
 function renderCertifications() {
   const container = document.getElementById("selected-certs-container");
+
   if (certificationsData.length === 0) {
     container.innerHTML =
       '<p class="empty-state">Añade tus certificaciones profesionales</p>';
     return;
   }
+
   container.innerHTML = certificationsData
     .map(
       (cert) => `
     <div style="background: linear-gradient(135deg, #6e8efb, #5a75e6); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
-      ${cert}
-      <button type="button" onclick="removeCertification('${cert}')" class="remove-btn" style="background: rgba(255,255,255,0.3); border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-weight: bold;">x</button>
+      🎓 ${cert}
+      <button type="button" onclick="removeCertification('${cert}')" class="remove-btn" style="background: rgba(255,255,255,0.3); border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕</button>
     </div>
   `,
     )
@@ -213,8 +224,9 @@ function addEquipo() {
     alert("Por favor, ingresa un equipo");
     return;
   }
+
   if (equipmentData.length >= 10) {
-    alert("Maximo 10 equipos");
+    alert("Máximo 10 equipos");
     return;
   }
 
@@ -234,16 +246,18 @@ function removeEquipo(item) {
 
 function renderEquipment() {
   const container = document.getElementById("selected-equipo-container");
+
   if (equipmentData.length === 0) {
     container.innerHTML = '<p class="empty-state">Añade tu equipamiento</p>';
     return;
   }
+
   container.innerHTML = equipmentData
     .map(
       (item) => `
     <div style="background: linear-gradient(135deg, #6e8efb, #5a75e6); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
-      ${item}
-      <button type="button" onclick="removeEquipo('${item}')" class="remove-btn" style="background: rgba(255,255,255,0.3); border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-weight: bold;">x</button>
+      🛠️ ${item}
+      <button type="button" onclick="removeEquipo('${item}')" class="remove-btn" style="background: rgba(255,255,255,0.3); border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕</button>
     </div>
   `,
     )
@@ -261,7 +275,7 @@ function addExperiencia() {
     .value.trim();
 
   if (!titulo || !fecha) {
-    alert("Por favor, rellena el titulo y la fecha");
+    alert("Por favor, rellena el título y la fecha");
     return;
   }
 
@@ -346,7 +360,7 @@ function renderLanguages() {
       <span class="language-name">${lang.nombre}</span>
       <div style="display: flex; align-items: center; gap: 10px;">
         <span class="language-level">${lang.nivel}</span>
-        <button type="button" onclick="removeIdioma(${index})" style="background: #fee2e2; border: none; color: #b91c1c; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">x</button>
+        <button type="button" onclick="removeIdioma(${index})" style="background: #fee2e2; border: none; color: #b91c1c; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">✕</button>
       </div>
     </div>
   `,

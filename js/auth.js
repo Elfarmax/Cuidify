@@ -4,12 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const userSession = JSON.parse(localStorage.getItem("usuario_sesion"));
 
   if (userSession && authSection) {
-    // Ocultar enlaces de usuarios sin autenticar
     unauthLinks.forEach((link) => {
       link.style.display = "none";
     });
 
-    // Menú según el rol
     let menuItems = "";
 
     if (userSession.role === "cuidador") {
@@ -56,7 +54,6 @@ function toggleMenuDropdown() {
   }
 }
 
-// Cerrar el menú si se hace clic fuera de él
 document.addEventListener("click", (event) => {
   const dropdown = document.getElementById("menuDropdown");
   const container = document.querySelector(".menu-dropdown-container");

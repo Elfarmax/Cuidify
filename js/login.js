@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
           localStorage.setItem("usuario_sesion", JSON.stringify(sesion));
 
-          // Redirigir según el rol
           if (userData.rol === "cuidador") {
             window.location.href = "perfil.html";
           } else {
