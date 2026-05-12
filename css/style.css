@@ -2280,3 +2280,21 @@ h3 {
   background-color: #dc3545 !important;
   color: white !important;
 }
+
+.formacion-box {
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.formacion-titulo {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #475569;
+}
+
+.formacion-texto {
+  color: #475569;
+  font-size: 0.94rem;
+}

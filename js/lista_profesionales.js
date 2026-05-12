@@ -230,7 +230,12 @@ const filtroServicio = document.getElementById("filtro-servicio");
 function buildProfileCard(p) {
   const infoExtra = `
         <div class="detalles-perfil-tarjeta">
-            ${p.formacion ? `<p><span>🎓</span> <b>Formación:</b> ${p.formacion}</p>` : ""}
+            ${p.formacion ? `
+  <div class="formacion-box">
+    <div class="formacion-titulo">🎓 Formación:</div>
+    <div class="formacion-texto">${p.formacion}</div>
+  </div>
+` : ""}
         </div>
     `;
 
