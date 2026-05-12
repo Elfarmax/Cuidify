@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso | CasaCuidadoPro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        <span>CasaCuidadoPro</span>
+      </div>
+      <div class="auth-buttons" id="auth-section">
+        <select
+          class="theme-selector-pro"
+          onchange="applyTheme(this.value)"
+          title="Selector de Accesibilidad"
+          style="margin-right: 10px"
+        >
+          <option value="normal">👁️ Estándar</option>
+          <option value="protanopia">🎨 Daltonismo</option>
+          <option value="high-contrast">🌓 Alto Contraste</option>
+        </select>
+        <a href="index.html" class="btn-outline">Volver</a>
+      </div>
+    </header>
+
+    <main class="auth-page-wrapper">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>¡Hola de nuevo!</h2>
+          <p class="subtitle">
+            Introduce tus datos para acceder a CasaCuidado Pro
+          </p>
+        </div>
+
+        <form id="form-login">
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input
+              type="email"
+              id="login-email"
+              placeholder="ejemplo@correo.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input
+              type="password"
+              id="login-password"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-primary full">Entrar ahora</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 15px">
+          <a
+            href="recuperar.html"
+            style="color: var(--text-muted); font-size: 0.9rem"
+            >¿Olvidaste tu contraseña?</a
+          >
+        </div>
+
+        <div class="register-hint">
+          ¿Aún no tienes cuenta? <a href="registro.html">Regístrate gratis</a>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

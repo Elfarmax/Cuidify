@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aviso Legal | CasaCuidado Pro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        CasaCuidado<span>Pro</span>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="servicios.html" class="nav-link-unauthenticated">Servicios</a>
+        <a href="registro.html" class="nav-link-unauthenticated"
+          >Ser Cuidador</a
+        >
+        <span id="auth-section">
+          <a href="login.html" class="btn-primary btn-header">Entrar</a>
+        </span>
+      </nav>
+    </header>
+
+    <main>
+      <section class="scroll-content info-section">
+        <div class="section-container">
+          <div style="max-width: 800px; margin: 0 auto 20px; text-align: left">
+            <a
+              href="javascript:history.back()"
+              class="btn-outline"
+              style="padding: 8px 16px; font-size: 0.9rem"
+            >
+              ⬅ Volver
+            </a>
+          </div>
+
+          <div
+            class="profile-card"
+            style="
+              text-align: left;
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 50px;
+            "
+          >
+            <h1
+              style="
+                color: var(--primary);
+                margin-bottom: 20px;
+                font-size: 2.2rem;
+              "
+            >
+              Aviso Legal
+            </h1>
+
+            <h3 style="margin: 25px 0 10px; color: var(--text-main)">
+              1. Datos de la Empresa
+            </h3>
+            <p style="color: #555; margin-bottom: 15px">
+              En cumplimiento de la Ley 34/2002, le informamos que el titular de
+              este sitio web es <strong>CasaCuidado Pro S.L.</strong>, con NIF
+              B-00000000 y domicilio social en Madrid, España. Email de
+              contacto: legal@casacuidadopro.com
+            </p>
+
+            <h3 style="margin: 25px 0 10px; color: var(--text-main)">
+              2. Propiedad Intelectual
+            </h3>
+            <p style="color: #555; margin-bottom: 15px">
+              Todos los contenidos de este sitio web, incluyendo textos,
+              logotipos y el sistema de <i>IA Matching</i>, están protegidos por
+              derechos de propiedad intelectual e industrial propiedad de
+              CasaCuidado Pro.
+            </p>
+
+            <h3 style="margin: 25px 0 10px; color: var(--text-main)">
+              3. Responsabilidad
+            </h3>
+            <p style="color: #555; margin-bottom: 15px">
+              CasaCuidado Pro actúa como plataforma tecnológica de conexión.
+              Aunque verificamos rigurosamente a los profesionales, el servicio
+              final es responsabilidad directa del prestador del cuidado,
+              conforme a lo estipulado en nuestros términos de servicio.
+            </p>
+
+            <h3 style="margin: 25px 0 10px; color: var(--text-main)">
+              4. Legislación
+            </h3>
+            <p style="color: #555; margin-bottom: 15px">
+              Para cualquier controversia que pudiera surgir, las partes se
+              someten a los juzgados y tribunales de la ciudad de Madrid,
+              España.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand-side">
+          <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
+          <div class="footer-theme-wrap">
+            <select
+              class="theme-selector-pro"
+              onchange="applyTheme(this.value)"
+            >
+              <option value="normal">👁️ Estándar</option>
+              <option value="protanopia">🎨 Daltonismo</option>
+              <option value="high-contrast">🌓 Alto Contraste</option>
+            </select>
+          </div>
+          <p class="footer-copyright-text">
+            CasaCuidado Pro © 2026<br />Todos los derechos reservados.
+          </p>
+        </div>
+
+        <div class="footer-nav-side">
+          <div class="footer-nav-col">
+            <h4>Cuidadores</h4>
+            <nav>
+              <a href="sercuidador.html">Ser Cuidador</a>
+              <a href="casacuidadopro-info.html">CasaCuidadoPRO</a>
+              <a href="ayuda.html">Ayuda y Soporte</a>
+            </nav>
+          </div>
+          <div class="footer-nav-col">
+            <h4>Legal</h4>
+            <nav>
+              <a href="privacidad.html">Privacidad</a>
+              <a href="cookies.html">Cookies</a>
+              <a href="aviso-legal.html">Aviso Legal</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

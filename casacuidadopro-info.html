@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CasaCuidado PRO | Beneficios Exclusivos</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        CasaCuidado<span>Pro</span>
+      </div>
+      <nav class="nav-menu">
+        <a href="servicios.html">Servicios</a>
+        <a href="registro.html">Ser Cuidador</a>
+        <span id="auth-section"
+          ><a href="login.html" class="btn-primary btn-header">Entrar</a></span
+        >
+      </nav>
+    </header>
+
+    <main>
+      <div style="background: var(--bg-section); padding: 15px 0 0 0">
+        <div class="section-container" style="text-align: left">
+          <a
+            href="javascript:history.back()"
+            class="btn-outline"
+            style="
+              padding: 8px 16px;
+              font-size: 0.85rem;
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            ⬅ Volver
+          </a>
+        </div>
+      </div>
+
+      <section
+        class="hero-clean"
+        style="height: auto; padding: 50px 0; background: var(--bg-section)"
+      >
+        <div class="hero-content">
+          <h1 style="margin-bottom: 15px">
+            Descubre el nivel <span>PRO</span>
+          </h1>
+          <p style="max-width: 800px; margin: 0 auto">
+            El programa de reconocimiento para los cuidadores que marcan la
+            diferencia en nuestra comunidad.
+          </p>
+        </div>
+      </section>
+
+      <section class="scroll-content" style="padding-top: 30px">
+        <div class="section-container">
+          <div class="features-mini-grid">
+            <div
+              class="f-item"
+              style="text-align: left; align-items: flex-start; padding: 30px"
+            >
+              <span style="font-size: 2rem; margin-bottom: 10px; display: block"
+                >⭐</span
+              >
+              <h4>Sello de Verificación Oro</h4>
+              <p>
+                Tu perfil destacará con una insignia exclusiva que transmite
+                confianza inmediata a las familias que buscan lo mejor.
+              </p>
+            </div>
+
+            <div
+              class="f-item"
+              style="text-align: left; align-items: flex-start; padding: 30px"
+            >
+              <span style="font-size: 2rem; margin-bottom: 10px; display: block"
+                >📈</span
+              >
+              <h4>Prioridad en el Matching</h4>
+              <p>
+                Nuestro algoritmo de IA posiciona a los miembros PRO en las
+                primeras sugerencias para servicios de alta demanda.
+              </p>
+            </div>
+
+            <div
+              class="f-item"
+              style="text-align: left; align-items: flex-start; padding: 30px"
+            >
+              <span style="font-size: 2rem; margin-bottom: 10px; display: block"
+                >🎁</span
+              >
+              <h4>Formación Continua</h4>
+              <p>
+                Acceso gratuito a cursos certificados de especialización
+                (primeros auxilios, psicología geriátrica, etc.) para mejorar tu
+                CV.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="profile-card"
+            style="
+              margin-top: 50px;
+              padding: 40px;
+              border-left: 5px solid var(--primary);
+            "
+          >
+            <h3 style="margin-bottom: 20px">¿Cómo puedo ser PRO?</h3>
+            <ul
+              style="
+                list-style: none;
+                padding: 0;
+                color: var(--text-main);
+                line-height: 2;
+              "
+            >
+              <li>
+                ✅ Mantener una valoración media superior a 4.6 estrellas.
+              </li>
+              <li>✅ Tener más de 10 servicios completados con éxito.</li>
+              <li>
+                ✅ Documentación de identidad y antecedentes 100% validada.
+              </li>
+              <li>✅ Tasa de respuesta a mensajes inferior a 24 horas.</li>
+            </ul>
+          </div>
+
+          <div style="text-align: center; margin-top: 60px">
+            <p style="color: var(--text-muted); margin-bottom: 20px">
+              Si cumples los requisitos, el distintivo se aplicará
+              automáticamente a tu cuenta.
+            </p>
+            <a href="registro.html" class="btn-primary"
+              >Registrarme y empezar mi camino PRO</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand-side">
+          <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
+          <div class="footer-theme-wrap">
+            <select
+              class="theme-selector-pro"
+              onchange="applyTheme(this.value)"
+            >
+              <option value="normal">👁️ Estándar</option>
+              <option value="protanopia">🎨 Daltonismo</option>
+              <option value="high-contrast">🌓 Alto Contraste</option>
+            </select>
+          </div>
+          <p class="footer-copyright-text">
+            CasaCuidado Pro © 2026<br />
+            Todos los derechos reservados.
+          </p>
+        </div>
+
+        <div class="footer-nav-side">
+          <div class="footer-nav-col">
+            <h4>Servicio de Cuidados</h4>
+            <nav>
+              <a href="servicios.html">Cuidado de Mayores</a>
+              <a href="servicios.html">Cuidado de Niños</a>
+              <a href="servicios.html">Pers. Dependientes</a>
+            </nav>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4>Cuidadores</h4>
+            <nav>
+              <a href="sercuidador.html">Ser Cuidador</a>
+              <a href="casacuidadopro-info.html">CasaCuidadoPRO</a>
+              <a href="ayuda.html">Ayuda</a>
+            </nav>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4>Legal</h4>
+            <nav>
+              <a href="privacidad.html">Privacidad</a>
+              <a href="cookies.html">Cookies</a>
+              <a href="aviso-legal.html">Aviso Legal</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

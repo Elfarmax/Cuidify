@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Perfil Familiar | CasaCuidadoPro</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body
+    id="appBody"
+    style="
+      background: linear-gradient(135deg, #f1f5f9 0%, #e8eef7 100%);
+      min-height: 100vh;
+    "
+  >
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        <span>CasaCuidadoPro</span>
+      </div>
+      <div style="display: flex; gap: 15px; align-items: center">
+        <span id="auth-section"></span>
+        <select
+          class="theme-selector-pro"
+          onchange="applyTheme(this.value)"
+          style="padding: 8px 15px"
+        >
+          <option value="normal">Estandar</option>
+          <option value="protanopia">Daltonismo</option>
+          <option value="high-contrast">Alto Contraste</option>
+        </select>
+      </div>
+    </header>
+
+    <main
+      style="
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        margin-bottom: 60px;
+      "
+    >
+      <!-- HEADER PERFIL FAMILIA -->
+      <div class="professional-profile-header">
+        <div class="profile-banner"></div>
+        <div class="profile-header-flex">
+          <div class="avatar-section">
+            <div class="avatar-large-pro" id="avatar-char">F</div>
+            <div class="verification-badge">Verificado</div>
+          </div>
+          <div class="profile-info-section">
+            <div
+              style="
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+              "
+            >
+              <div>
+                <h1 id="display-name" class="profile-name">Cargando...</h1>
+                <p class="profile-role">Familia</p>
+                <p class="profile-location">Madrid, España</p>
+              </div>
+              <a
+                href="lista-profesionales.html"
+                class="btn-primary"
+                style="padding: 12px 24px; font-weight: 600"
+              >
+                Buscar Cuidadores
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESTADÍSTICAS FAMILIA -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Servicios Contratados</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">4.8</div>
+            <div class="stat-label">Valoracion como Cliente</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Cuidadores Favoritos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Pagos al dia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL -->
+      <div class="profile-grid-2" style="margin-top: 30px">
+        <!-- COLUMNA 1 -->
+        <div class="profile-column">
+          <!-- DATOS PERSONALES -->
+          <div class="profile-card-pro">
+            <h2 class="card-title">Mis Datos</h2>
+            <p id="display-bio" class="bio-text">Cargando informacion...</p>
+            <div class="contact-info">
+              <a href="mailto:" id="display-email" class="contact-link"
+                >correo@ejemplo.com</a
+              >
+              <a href="tel:" id="display-phone-link" class="contact-link"
+                >+34 000 000 000</a
+              >
+            </div>
+            <button
+              class="btn-primary"
+              onclick="toggleEditMode()"
+              style="width: 100%; margin-top: 15px; padding: 10px"
+            >
+              Editar Datos
+            </button>
+          </div>
+
+          <!-- FAMILIAR A CUIDAR -->
+          <div class="profile-card-pro">
+            <h2 class="card-title">Familiar a Cuidar</h2>
+
+            <div class="form-group" style="margin-bottom: 15px">
+              <label
+                style="font-weight: 600; display: block; margin-bottom: 8px"
+                >Nombre del familiar</label
+              >
+              <input
+                type="text"
+                id="familiar-nombre"
+                placeholder="Ej: Maria Lopez"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 6px;
+                "
+              />
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px">
+              <label
+                style="font-weight: 600; display: block; margin-bottom: 8px"
+                >Parentesco</label
+              >
+              <select
+                id="familiar-parentesco"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 6px;
+                "
+              >
+                <option value="">Selecciona...</option>
+                <option value="madre">Madre</option>
+                <option value="padre">Padre</option>
+                <option value="abuelo">Abuelo/a</option>
+                <option value="hijo">Hijo/a</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px">
+              <label
+                style="font-weight: 600; display: block; margin-bottom: 8px"
+                >Edad</label
+              >
+              <input
+                type="number"
+                id="familiar-edad"
+                placeholder="Ej: 75"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 6px;
+                "
+              />
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px">
+              <label
+                style="font-weight: 600; display: block; margin-bottom: 8px"
+                >Necesidades especiales</label
+              >
+              <textarea
+                id="familiar-necesidades"
+                rows="3"
+                placeholder="Ej: Movilidad reducida, diabetes..."
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 6px;
+                "
+              ></textarea>
+            </div>
+
+            <!-- Resumen del familiar guardado -->
+            <div id="familiar-resumen"></div>
+
+            <button
+              id="btn-guardar-familiar"
+              class="btn-primary"
+              style="width: 100%; padding: 10px; margin-top: 10px"
+            >
+              Guardar Familiar
+            </button>
+          </div>
+        </div>
+
+        <!-- COLUMNA 2 -->
+        <div class="profile-column">
+          <!-- SERVICIOS QUE NECESITO -->
+          <div class="profile-card-pro">
+            <h2 class="card-title">Servicios que Necesito</h2>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-bottom: 15px;
+              "
+            >
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                "
+              >
+                <input type="checkbox" class="servicio-check" value="mayores" />
+                Cuidado de Mayores
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                "
+              >
+                <input type="checkbox" class="servicio-check" value="ninos" />
+                Cuidado de Ninos
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="servicio-check"
+                  value="mascotas"
+                />
+                Mascotas
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="servicio-check"
+                  value="limpieza"
+                />
+                Limpieza
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                "
+              >
+                <input type="checkbox" class="servicio-check" value="cocina" />
+                Cocina
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="servicio-check"
+                  value="jardineria"
+                />
+                Jardineria
+              </label>
+            </div>
+            <button
+              id="btn-guardar-servicios"
+              class="btn-primary"
+              style="width: 100%; padding: 10px"
+            >
+              Guardar Preferencias
+            </button>
+          </div>
+
+          <!-- CUIDADORES FAVORITOS -->
+          <div class="profile-card-pro">
+            <h2 class="card-title">Cuidadores Favoritos</h2>
+            <div id="favoritos-container">
+              <p class="empty-state">
+                Aun no tienes cuidadores favoritos. Explora nuestra lista y
+                añade los que mas te gusten.
+              </p>
+            </div>
+            <a
+              href="lista-profesionales.html"
+              class="btn-primary"
+              style="
+                display: block;
+                text-align: center;
+                margin-top: 15px;
+                padding: 10px;
+              "
+            >
+              Explorar Cuidadores
+            </a>
+          </div>
+
+          <!-- PRÓXIMOS SERVICIOS -->
+          <div class="profile-card-pro">
+            <h2 class="card-title">Proximos Servicios</h2>
+            <div id="servicios-container">
+              <p class="empty-state">
+                No tienes servicios programados proximamente.
+              </p>
+            </div>
+            <a
+              href="lista-profesionales.html"
+              class="btn-primary"
+              style="
+                display: block;
+                text-align: center;
+                margin-top: 15px;
+                padding: 10px;
+              "
+            >
+              Contratar Servicio
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODO EDICIÓN -->
+      <div id="edit-mode" style="display: none; margin-top: 30px">
+        <div class="profile-card-pro" style="max-width: 600px; margin: 0 auto">
+          <h2 style="margin-bottom: 30px; font-size: 1.8rem">
+            Editar Mis Datos
+          </h2>
+          <form id="form-edit-profile">
+            <div class="form-grid-2col">
+              <div class="form-group">
+                <label style="font-weight: 600">Nombre</label>
+                <input
+                  type="text"
+                  id="edit-nombre"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 6px;
+                  "
+                />
+              </div>
+              <div class="form-group">
+                <label style="font-weight: 600">Apellidos</label>
+                <input
+                  type="text"
+                  id="edit-apellidos"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 6px;
+                  "
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label style="font-weight: 600">Telefono</label>
+              <input
+                type="text"
+                id="edit-phone"
+                placeholder="+34..."
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 6px;
+                "
+              />
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px">
+              <button
+                type="submit"
+                class="btn-primary"
+                style="flex: 1; padding: 12px; font-weight: 600"
+              >
+                Guardar Cambios
+              </button>
+              <button
+                type="button"
+                class="btn-outline"
+                onclick="toggleEditMode()"
+                style="flex: 1; padding: 12px; font-weight: 600"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/perfil-familia.js"></script>
+  </body>
+</html>
