@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("usuario_sesion", JSON.stringify(usuario));
       renderPerfilFamilia(usuario);
       toggleEditMode();
-      alert("Perfil actualizado correctamente");
+      alert("✅ Perfil actualizado correctamente");
     };
   }
 
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         storageKey("familiar_datos"),
         JSON.stringify(familiar),
       );
-      alert("Datos del familiar guardados correctamente.");
+      alert("✅ Datos del familiar guardados correctamente.");
       mostrarFamiliarGuardado(familiar);
     });
   }
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         storageKey("servicios_necesitados"),
         JSON.stringify(servicios),
       );
-      alert("Preferencias guardadas correctamente.");
+      alert("✅ Preferencias guardadas correctamente.");
     });
   }
 });
@@ -145,5 +145,9 @@ function cargarServicios() {
 // ========== TOGGLE EDICIÓN ==========
 function toggleEditMode() {
   const editMode = document.getElementById("edit-mode");
-  editMode.style.display = editMode.style.display === "none" ? "block" : "none";
+  if (editMode.style.display === "none" || editMode.style.display === "") {
+    editMode.style.display = "flex";
+  } else {
+    editMode.style.display = "none";
+  }
 }

@@ -1,278 +1,313 @@
 <!doctype html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CasaCuidado Pro | Expertos en Confianza</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CasaCuidado Pro | Expertos en Confianza</title>
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body id="appBody">
-  <header>
-    <div class="logo" onclick="window.location.href = 'index.html'">
-      <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
-      CasaCuidado<span>Pro</span>
-    </div>
-
-    <nav class="nav-menu">
-      <div class="header-socials-real">
-        <a href="https://facebook.com" target="_blank" title="Facebook">
-          <svg viewBox="0 0 512 512" width="24" height="24">
-            <path fill="#1877F2"
-              d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.8 90.7 226.4 209.3 245V327.7h-63V256h63v-53.2c0-62.2 37-96.6 93.8-96.6 27.2 0 55.7 4.8 55.7 4.8v61.2h-31.3c-30.8 0-40.4 19.1-40.4 38.7V256h69.1l-11 71.7h-58.1V501C413.3 482.4 504 379.8 504 256z" />
-          </svg>
-        </a>
-        <a href="https://x.com" target="_blank" title="X">
-          <svg viewBox="0 0 512 512" width="24" height="24">
-            <path fill="#000000"
-              d="M389.2 48h70.6L305.6 224.2 487.4 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-          </svg>
-        </a>
-        <a href="https://instagram.com" target="_blank" title="Instagram">
-          <svg viewBox="0 0 512 512" width="24" height="24">
-            <radialGradient id="insta-grad" r="150%" cx="30%" cy="150%">
-              <stop stop-color="#fdf497" offset="0" />
-              <stop stop-color="#fd5949" offset="0.45" />
-              <stop stop-color="#d6249f" offset="0.6" />
-              <stop stop-color="#285AEB" offset="0.9" />
-            </radialGradient>
-            <path fill="url(#insta-grad)"
-              d="M349.33 69.33a93.62 93.62 0 0 1 93.34 93.34v186.66a93.62 93.62 0 0 1-93.34 93.34H162.67a93.62 93.62 0 0 1-93.34-93.34V162.67a93.62 93.62 0 0 1 93.34-93.34zm0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32zM256 137.33a118.67 118.67 0 1 0 118.67 118.67A118.67 118.67 0 0 0 256 137.33zm0 200A81.33 81.33 0 1 1 337.33 256 81.33 81.33 0 0 1 256 337.33zM388 124a26 26 0 1 1-26 26 26 26 0 0 1 26-26z" />
-          </svg>
-        </a>
-        <a href="https://linkedin.com" target="_blank" title="LinkedIn">
-          <svg viewBox="0 0 512 512" width="24" height="24">
-            <path fill="#0077B5"
-              d="M416 32H96C60.65 32 32 60.65 32 96v320c0 35.35 28.65 64 64 64h320c0-35.35 28.65-64 64-64V96c0-35.35-28.65-64-64-64zM183.1 384h-55V213h55v171zm-27.5-195.1c-17.6 0-31.9-14.3-31.9-31.9s14.3-31.9 31.9-31.9c17.6 0 31.9 14.3 31.9 31.9s-14.3 31.9-31.9 31.9zM384 384h-55V297.3c0-20.7-3.7-41.4-29.4-41.4-25.7 0-29.6 20.7-29.6 41.4V384h-55V213h55v23.5c7.6-11.4 20.8-23.5 46.2-23.5 48.3 0 57.8 31.8 57.8 73.1V384z" />
-          </svg>
-        </a>
+  <body id="appBody">
+    <header>
+      <div class="logo" onclick="window.location.href = 'index.html'">
+        <img src="imagenes/logo (2).png" alt="Logo" class="logo-img" />
+        CasaCuidado<span>Pro</span>
       </div>
 
-      <a href="servicios.html" class="nav-link-unauthenticated">Servicios</a>
-      <a href="registro.html" class="nav-link-unauthenticated">Ser Cuidador</a>
-      <span id="auth-section">
-        <a href="login.html" class="btn-primary btn-header">Entrar</a>
-      </span>
-      <select class="theme-selector-pro" onchange="applyTheme(this.value)" title="Selector de Accesibilidad">
-        <option value="normal">👁️ Estándar</option>
-        <option value="protanopia">🎨 Daltonismo</option>
-        <option value="high-contrast">🌓 Alto Contraste</option>
-      </select>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero-clean">
-      <div class="hero-content">
-        <h1>
-          Tu hogar merece el mejor <br /><span>cuidado profesional</span>
-        </h1>
-        <p>
-          Conectamos familias con profesionales verificados mediante IA.
-          Seguridad y cariño en cada visita.
-        </p>
-        <div class="hero-btns">
-          <button class="btn-outline" onclick="scrollToSection('info')">
-            Ver servicios
-          </button>
-          <a href="registro.html" class="btn-primary">Registrarse gratis</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="valoraciones" class="scroll-content valoraciones-bg">
-      <div class="section-container text-center">
-        <h2>Lo que dicen de nosotros</h2>
-
-        <div class="testimonios-grid" id="testimoniosGrid">
-          <!-- Las valoraciones de la BD se cargarán aquí -->
-          <div class="testimonio-card">
-            <div class="estrellas">⭐⭐⭐⭐⭐</div>
-            <p class="texto-testimonio">
-              "Gracias a Cuidify encontramos a Ana. El trato con mi padre ha
-              sido excepcional y nos da muchísima tranquilidad en el día a
-              día."
-            </p>
-            <div class="autor-info">
-              <div class="avatar">M</div>
-              <div>
-                <h4>María López</h4>
-                <span>Familiar</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonio-card">
-            <div class="estrellas">⭐⭐⭐⭐⭐</div>
-            <p class="texto-testimonio">
-              "Una plataforma muy profesional y fácil de usar. Me ha permitido
-              conectar de forma segura con familias que realmente necesitan mi
-              ayuda."
-            </p>
-            <div class="autor-info">
-              <div class="avatar cuidador-avatar">C</div>
-              <div>
-                <h4>Carlos Ruiz</h4>
-                <span>Cuidador Profesional</span>
-              </div>
-            </div>
-          </div>
-          <div class="testimonio-card">
-            <div class="estrellas">⭐⭐⭐⭐⭐</div>
-            <p class="texto-testimonio">
-              "El sistema de 'IA Matching' acertó a la primera. Estamos
-              encantados con el servicio, la cercanía y la interfaz."
-            </p>
-            <div class="autor-info">
-              <div class="avatar">E</div>
-              <div>
-                <h4>Elena Gómez</h4>
-                <span>Familiar</span>
-              </div>
-            </div>
-          </div>
+      <nav class="nav-menu">
+        <div class="header-socials-real">
+          <a href="https://facebook.com" target="_blank" title="Facebook">
+            <svg viewBox="0 0 512 512" width="24" height="24">
+              <path
+                fill="#1877F2"
+                d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.8 90.7 226.4 209.3 245V327.7h-63V256h63v-53.2c0-62.2 37-96.6 93.8-96.6 27.2 0 55.7 4.8 55.7 4.8v61.2h-31.3c-30.8 0-40.4 19.1-40.4 38.7V256h69.1l-11 71.7h-58.1V501C413.3 482.4 504 379.8 504 256z"
+              />
+            </svg>
+          </a>
+          <a href="https://x.com" target="_blank" title="X">
+            <svg viewBox="0 0 512 512" width="24" height="24">
+              <path
+                fill="#000000"
+                d="M389.2 48h70.6L305.6 224.2 487.4 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+              />
+            </svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" title="Instagram">
+            <svg viewBox="0 0 512 512" width="24" height="24">
+              <radialGradient id="insta-grad" r="150%" cx="30%" cy="150%">
+                <stop stop-color="#fdf497" offset="0" />
+                <stop stop-color="#fd5949" offset="0.45" />
+                <stop stop-color="#d6249f" offset="0.6" />
+                <stop stop-color="#285AEB" offset="0.9" />
+              </radialGradient>
+              <path
+                fill="url(#insta-grad)"
+                d="M349.33 69.33a93.62 93.62 0 0 1 93.34 93.34v186.66a93.62 93.62 0 0 1-93.34 93.34H162.67a93.62 93.62 0 0 1-93.34-93.34V162.67a93.62 93.62 0 0 1 93.34-93.34zm0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32zM256 137.33a118.67 118.67 0 1 0 118.67 118.67A118.67 118.67 0 0 0 256 137.33zm0 200A81.33 81.33 0 1 1 337.33 256 81.33 81.33 0 0 1 256 337.33zM388 124a26 26 0 1 1-26 26 26 26 0 0 1 26-26z"
+              />
+            </svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+            <svg viewBox="0 0 512 512" width="24" height="24">
+              <path
+                fill="#0077B5"
+                d="M416 32H96C60.65 32 32 60.65 32 96v320c0 35.35 28.65 64 64 64h320c0-35.35 28.65-64 64-64V96c0-35.35-28.65-64-64-64zM183.1 384h-55V213h55v171zm-27.5-195.1c-17.6 0-31.9-14.3-31.9-31.9s14.3-31.9 31.9-31.9c17.6 0 31.9 14.3 31.9 31.9s-14.3 31.9-31.9 31.9zM384 384h-55V297.3c0-20.7-3.7-41.4-29.4-41.4-25.7 0-29.6 20.7-29.6 41.4V384h-55V213h55v23.5c7.6-11.4 20.8-23.5 46.2-23.5 48.3 0 57.8 31.8 57.8 73.1V384z"
+              />
+            </svg>
+          </a>
         </div>
 
-        <br />
+        <a href="servicios.html" class="nav-link-unauthenticated">Servicios</a>
+        <a href="registro.html" class="nav-link-unauthenticated"
+          >Ser Cuidador</a
+        >
+        <span id="auth-section">
+          <a href="login.html" class="btn-primary btn-header">Entrar</a>
+        </span>
+        <select
+          class="theme-selector-pro"
+          onchange="applyTheme(this.value)"
+          title="Selector de Accesibilidad"
+        >
+          <option value="normal">👁️ Estándar</option>
+          <option value="protanopia">🎨 Daltonismo</option>
+          <option value="high-contrast">🌓 Alto Contraste</option>
+        </select>
+      </nav>
+    </header>
 
-        <div class="comentarios-form">
-          <h3>Deja tu valoración</h3>
+    <main>
+      <section class="hero-clean">
+        <div class="hero-content">
+          <h1>
+            Tu hogar merece el mejor <br /><span>cuidado profesional</span>
+          </h1>
+          <p>
+            Conectamos familias con profesionales verificados mediante IA.
+            Seguridad y cariño en cada visita.
+          </p>
+          <div class="hero-btns">
+            <a href="servicios.html" class="btn-outline">Ver servicios</a>
+            <a href="registro.html" class="btn-primary">Registrarse gratis</a>
+          </div>
+        </div>
+      </section>
 
-          <!-- Mensaje para usuarios no logueados -->
-          <div id="login-required-msg" style="
+      <section id="valoraciones" class="scroll-content valoraciones-bg">
+        <div class="section-container text-center">
+          <h2>Lo que dicen de nosotros</h2>
+
+          <div class="testimonios-grid" id="testimoniosGrid">
+            <!-- Las valoraciones de la BD se cargarán aquí -->
+            <div class="testimonio-card">
+              <div class="estrellas">⭐⭐⭐⭐⭐</div>
+              <p class="texto-testimonio">
+                "Gracias a Cuidify encontramos a Ana. El trato con mi padre ha
+                sido excepcional y nos da muchísima tranquilidad en el día a
+                día."
+              </p>
+              <div class="autor-info">
+                <div class="avatar">M</div>
+                <div>
+                  <h4>María López</h4>
+                  <span>Familiar</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonio-card">
+              <div class="estrellas">⭐⭐⭐⭐⭐</div>
+              <p class="texto-testimonio">
+                "Una plataforma muy profesional y fácil de usar. Me ha permitido
+                conectar de forma segura con familias que realmente necesitan mi
+                ayuda."
+              </p>
+              <div class="autor-info">
+                <div class="avatar cuidador-avatar">C</div>
+                <div>
+                  <h4>Carlos Ruiz</h4>
+                  <span>Cuidador Profesional</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonio-card">
+              <div class="estrellas">⭐⭐⭐⭐⭐</div>
+              <p class="texto-testimonio">
+                "El sistema de 'IA Matching' acertó a la primera. Estamos
+                encantados con el servicio, la cercanía y la interfaz."
+              </p>
+              <div class="autor-info">
+                <div class="avatar">E</div>
+                <div>
+                  <h4>Elena Gómez</h4>
+                  <span>Familiar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="comentarios-form">
+            <h3>Deja tu valoración</h3>
+
+            <!-- Mensaje para usuarios no logueados -->
+            <div
+              id="login-required-msg"
+              style="
                 display: none;
                 padding: 20px;
                 background: #f0f4ff;
                 border-radius: 12px;
                 border: 2px dashed var(--primary);
                 margin-bottom: 20px;
-              ">
-            <p style="
+              "
+            >
+              <p
+                style="
                   color: var(--primary);
                   font-weight: 600;
                   margin-bottom: 10px;
-                ">
-              👤 Necesitas iniciar sesión para dejar una valoración
-            </p>
-            <a href="registro.html" class="btn-primary" style="display: inline-block; padding: 10px 24px">Regístrate
-              gratis</a>
-            <a href="login.html" class="btn-outline" style="
+                "
+              >
+                👤 Necesitas iniciar sesión para dejar una valoración
+              </p>
+              <a
+                href="registro.html"
+                class="btn-primary"
+                style="display: inline-block; padding: 10px 24px"
+                >Regístrate gratis</a
+              >
+              <a
+                href="login.html"
+                class="btn-outline"
+                style="
                   display: inline-block;
                   padding: 10px 24px;
                   margin-left: 10px;
-                ">Iniciar sesión</a>
-          </div>
+                "
+                >Iniciar sesión</a
+              >
+            </div>
 
-          <!-- Formulario solo visible si hay sesión -->
-          <form id="formComentario" class="comentario-grid" style="display: none">
-            <input type="text" id="nombre" placeholder="Tu nombre" required />
-            <select id="rating" required>
-              <option value="">Selecciona puntuación</option>
-              <option value="5">⭐⭐⭐⭐⭐ Excelente</option>
-              <option value="4">⭐⭐⭐⭐ Muy bueno</option>
-              <option value="3">⭐⭐⭐ Bueno</option>
-              <option value="2">⭐⭐ Regular</option>
-              <option value="1">⭐ Malo</option>
+            <!-- Formulario solo visible si hay sesión -->
+            <form
+              id="formComentario"
+              class="comentario-grid"
+              style="display: none"
+            >
+              <input type="text" id="nombre" placeholder="Tu nombre" required />
+              <select id="rating" required>
+                <option value="">Selecciona puntuación</option>
+                <option value="5">⭐⭐⭐⭐⭐ Excelente</option>
+                <option value="4">⭐⭐⭐⭐ Muy bueno</option>
+                <option value="3">⭐⭐⭐ Bueno</option>
+                <option value="2">⭐⭐ Regular</option>
+                <option value="1">⭐ Malo</option>
+              </select>
+              <textarea
+                id="mensaje"
+                placeholder="Escribe tu experiencia..."
+                required
+              ></textarea>
+              <button type="submit" class="btn-primary">
+                Publicar valoración
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="info" class="scroll-content info-section">
+        <div class="section-container text-center">
+          <h2>¿Por qué elegirnos?</h2>
+          <div class="features-mini-grid">
+            <div class="f-item">
+              <span class="icon">🤖</span>
+              <h4>IA Matching</h4>
+              <p>
+                Encontramos el perfil que mejor encaja con tus necesidades
+                específicas.
+              </p>
+            </div>
+            <div class="f-item">
+              <span class="icon">🛡️</span>
+              <h4>Seguridad 100%</h4>
+              <p>
+                Todos los profesionales pasan una entrevista y validación de
+                antecedentes.
+              </p>
+            </div>
+            <div class="f-item">
+              <span class="icon">💬</span>
+              <h4>Chat Directo</h4>
+              <p>
+                Habla con tu cuidador en tiempo real desde nuestra plataforma.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand-side">
+          <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
+          <div class="footer-theme-wrap">
+            <select
+              class="theme-selector-pro"
+              onchange="applyTheme(this.value)"
+            >
+              <option value="normal">👁️ Estándar</option>
+              <option value="protanopia">🎨 Daltonismo</option>
+              <option value="high-contrast">🌓 Alto Contraste</option>
             </select>
-            <textarea id="mensaje" placeholder="Escribe tu experiencia..." required></textarea>
-            <button type="submit" class="btn-primary">
-              Publicar valoración
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section id="info" class="scroll-content info-section">
-      <div class="section-container text-center">
-        <h2>¿Por qué elegirnos?</h2>
-        <div class="features-mini-grid">
-          <div class="f-item">
-            <span class="icon">🤖</span>
-            <h4>IA Matching</h4>
-            <p>
-              Encontramos el perfil que mejor encaja con tus necesidades
-              específicas.
-            </p>
           </div>
-          <div class="f-item">
-            <span class="icon">🛡️</span>
-            <h4>Seguridad 100%</h4>
-            <p>
-              Todos los profesionales pasan una entrevista y validación de
-              antecedentes.
-            </p>
+          <p class="footer-copyright-text">
+            CasaCuidado Pro © 2026<br />Todos los derechos reservados.
+          </p>
+        </div>
+        <div class="footer-nav-side">
+          <div class="footer-nav-col">
+            <h4>Servicio de Cuidados</h4>
+            <nav>
+              <a href="servicios.html">Cuidado de Mayores</a>
+              <a href="servicios.html">Cuidado de Niños</a>
+              <a href="servicios.html">Pers. Dependientes</a>
+              <a href="servicios.html">Cuidado de Mascotas</a>
+            </nav>
           </div>
-          <div class="f-item">
-            <span class="icon">💬</span>
-            <h4>Chat Directo</h4>
-            <p>
-              Habla con tu cuidador en tiempo real desde nuestra plataforma.
-            </p>
+          <div class="footer-nav-col">
+            <h4>Otros Servicios</h4>
+            <nav>
+              <a href="servicios.html">Limpiezas y Cocina</a>
+              <a href="servicios.html">Lavandería y Plancha</a>
+              <a href="servicios.html">Jardín y Mantenimiento</a>
+              <a href="servicios.html">Shopping y Recados</a>
+            </nav>
+          </div>
+          <div class="footer-nav-col">
+            <h4>Cuidadores</h4>
+            <nav>
+              <a href="sercuidador.html">Ser Cuidador</a>
+              <a href="casacuidadopro-info.html">CasaCuidadoPRO</a>
+              <a href="ayuda.html">Ayuda</a>
+            </nav>
+          </div>
+          <div class="footer-nav-col">
+            <h4>Legal</h4>
+            <nav>
+              <a href="privacidad.html">Privacidad</a>
+              <a href="cookies.html">Cookies</a>
+              <a href="aviso-legal.html">Aviso Legal</a>
+            </nav>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-brand-side">
-        <div class="logo-footer">🏠 CasaCuidado<span>Pro</span></div>
-        <div class="footer-theme-wrap">
-          <select class="theme-selector-pro" onchange="applyTheme(this.value)">
-            <option value="normal">👁️ Estándar</option>
-            <option value="protanopia">🎨 Daltonismo</option>
-            <option value="high-contrast">🌓 Alto Contraste</option>
-          </select>
-        </div>
-        <p class="footer-copyright-text">
-          CasaCuidado Pro © 2026<br />Todos los derechos reservados.
-        </p>
-      </div>
-      <div class="footer-nav-side">
-        <div class="footer-nav-col">
-          <h4>Servicio de Cuidados</h4>
-          <nav>
-            <a href="servicios.html">Cuidado de Mayores</a>
-            <a href="servicios.html">Cuidado de Niños</a>
-            <a href="servicios.html">Pers. Dependientes</a>
-            <a href="servicios.html">Cuidado de Mascotas</a>
-          </nav>
-        </div>
-        <div class="footer-nav-col">
-          <h4>Otros Servicios</h4>
-          <nav>
-            <a href="servicios.html">Limpiezas y Cocina</a>
-            <a href="servicios.html">Lavandería y Plancha</a>
-            <a href="servicios.html">Jardín y Mantenimiento</a>
-            <a href="servicios.html">Shopping y Recados</a>
-          </nav>
-        </div>
-        <div class="footer-nav-col">
-          <h4>Cuidadores</h4>
-          <nav>
-            <a href="sercuidador.html">Ser Cuidador</a>
-            <a href="casacuidadopro-info.html">CasaCuidadoPRO</a>
-            <a href="ayuda.html">Ayuda</a>
-          </nav>
-        </div>
-        <div class="footer-nav-col">
-          <h4>Legal</h4>
-          <nav>
-            <a href="privacidad.html">Privacidad</a>
-            <a href="cookies.html">Cookies</a>
-            <a href="aviso-legal.html">Aviso Legal</a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/script.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/valoraciones.js"></script>
-  <script src="js/chat.js"></script>
-</body>
-
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/valoraciones.js"></script>
+    <script src="js/chat.js"></script>
+  </body>
 </html>

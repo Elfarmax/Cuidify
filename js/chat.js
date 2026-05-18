@@ -1,19 +1,19 @@
 /**
- * Lógica del Asistente Inteligente Cuidify
+ * Lógica del Asistente Inteligente CasaCuidado Pro
  * Implementación para TFG - Frontend Vanilla JS
  */
 
 const ChatCuidify = {
-    isOpen: false,
+  isOpen: false,
 
-    // Inicializar el chat e inyectar estilos/HTML
-    init() {
-        this.injectStyles();
-        this.render();
-    },
+  // Inicializar el chat e inyectar estilos/HTML
+  init() {
+    this.injectStyles();
+    this.render();
+  },
 
-    injectStyles() {
-        const styles = `
+  injectStyles() {
+    const styles = `
             /* El botón flotante (Launcher) con el azul exacto de tu botón 'Registrarse' */
             .chat-launcher { 
                 position: fixed; bottom: 30px; right: 30px; 
@@ -90,21 +90,21 @@ const ChatCuidify = {
             }
             .chat-send:hover { background: #4f71eb; }
         `;
-        const styleSheet = document.createElement("style");
-        styleSheet.innerText = styles;
-        document.head.appendChild(styleSheet);
-    },
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = styles;
+    document.head.appendChild(styleSheet);
+  },
 
-    render() {
-        const chatHTML = `
+  render() {
+    const chatHTML = `
             <button class="chat-launcher" id="chatLauncher">💬</button>
             <div class="chat-window" id="chatWindow">
                 <div class="chat-header">
-                    <span>Asistente Cuidify</span>
+                    <span>Asistente CasaCuidado Pro</span>
                     <button onclick="ChatCuidify.toggle()" style="background:none; border:none; color:white; cursor:pointer; font-size:18px;">✕</button>
                 </div>
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">¡Hola! Soy tu asistente de Cuidify. ¿En qué puedo ayudarte hoy con el cuidado de tus mayores?</div>
+                    <div class="message bot">¡Hola! Soy tu asistente de CasaCuidado Pro. No añadas datos personales. ¿En qué puedo ayudarte hoy con el cuidado de tus mayores?</div>
                 </div>
                 <div class="chat-footer">
                     <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu duda aquí...">
@@ -115,50 +115,54 @@ const ChatCuidify = {
                 </div>
             </div>
         `;
-        const container = document.createElement('div');
-        container.innerHTML = chatHTML;
-        document.body.appendChild(container);
+    const container = document.createElement("div");
+    container.innerHTML = chatHTML;
+    document.body.appendChild(container);
 
-        // Eventos
-        document.getElementById('chatLauncher').onclick = () => this.toggle();
-        document.getElementById('chatSend').onclick = () => this.sendMessage();
-        document.getElementById('chatInput').onkeypress = (e) => { if (e.key === 'Enter') this.sendMessage(); };
-    },
+    // Eventos
+    document.getElementById("chatLauncher").onclick = () => this.toggle();
+    document.getElementById("chatSend").onclick = () => this.sendMessage();
+    document.getElementById("chatInput").onkeypress = (e) => {
+      if (e.key === "Enter") this.sendMessage();
+    };
+  },
 
-    toggle() {
-        this.isOpen = !this.isOpen;
-        document.getElementById('chatWindow').style.display = this.isOpen ? 'flex' : 'none';
-    },
+  toggle() {
+    this.isOpen = !this.isOpen;
+    document.getElementById("chatWindow").style.display = this.isOpen
+      ? "flex"
+      : "none";
+  },
 
-    async sendMessage() {
-        const input = document.getElementById('chatInput');
-        const text = input.value.trim();
-        if (!text) return;
+  async sendMessage() {
+    const input = document.getElementById("chatInput");
+    const text = input.value.trim();
+    if (!text) return;
 
-        this.addMessage(text, 'user');
-        input.value = '';
+    this.addMessage(text, "user");
+    input.value = "";
 
-        try {
-            const response = await fetch("http://localhost:3000/api/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: text })
-            });
-            const data = await response.json();
-            this.addMessage(data.response || data.error, 'bot');
-        } catch (error) {
-            this.addMessage("Lo siento, no puedo conectar con el servidor.", 'bot');
-        }
-    },
-
-    addMessage(text, side) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `message ${side}`;
-        msgDiv.innerText = text;
-        const box = document.getElementById('chatMessages');
-        box.appendChild(msgDiv);
-        box.scrollTop = box.scrollHeight;
+    try {
+      const response = await fetch("http://localhost:3000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text }),
+      });
+      const data = await response.json();
+      this.addMessage(data.response || data.error, "bot");
+    } catch (error) {
+      this.addMessage("Lo siento, no puedo conectar con el servidor.", "bot");
     }
+  },
+
+  addMessage(text, side) {
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `message ${side}`;
+    msgDiv.innerText = text;
+    const box = document.getElementById("chatMessages");
+    box.appendChild(msgDiv);
+    box.scrollTop = box.scrollHeight;
+  },
 };
 
 // Arrancar el chat cuando cargue la página

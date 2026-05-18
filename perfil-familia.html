@@ -81,7 +81,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-number">4.8</div>
-            <div class="stat-label">Valoracion como Cliente</div>
+            <div class="stat-label">Valoración como Cliente</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">2</div>
@@ -89,7 +89,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-number">100%</div>
-            <div class="stat-label">Pagos al dia</div>
+            <div class="stat-label">Pagos al día</div>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@
           <!-- DATOS PERSONALES -->
           <div class="profile-card-pro">
             <h2 class="card-title">Mis Datos</h2>
-            <p id="display-bio" class="bio-text">Cargando informacion...</p>
+            <p id="display-bio" class="bio-text">Sin información añadida.</p>
             <div class="contact-info">
               <a href="mailto:" id="display-email" class="contact-link"
                 >correo@ejemplo.com</a
@@ -115,13 +115,13 @@
               onclick="toggleEditMode()"
               style="width: 100%; margin-top: 15px; padding: 10px"
             >
-              Editar Datos
+              ✏️ Editar Datos
             </button>
           </div>
 
           <!-- FAMILIAR A CUIDAR -->
           <div class="profile-card-pro">
-            <h2 class="card-title">Familiar a Cuidar</h2>
+            <h2 class="card-title">👨‍👩‍👧 Familiar a Cuidar</h2>
 
             <div class="form-group" style="margin-bottom: 15px">
               <label
@@ -200,7 +200,6 @@
               ></textarea>
             </div>
 
-            <!-- Resumen del familiar guardado -->
             <div id="familiar-resumen"></div>
 
             <button
@@ -217,7 +216,7 @@
         <div class="profile-column">
           <!-- SERVICIOS QUE NECESITO -->
           <div class="profile-card-pro">
-            <h2 class="card-title">Servicios que Necesito</h2>
+            <h2 class="card-title">🛎️ Servicios que Necesito</h2>
             <div
               style="
                 display: flex;
@@ -246,7 +245,7 @@
                 "
               >
                 <input type="checkbox" class="servicio-check" value="ninos" />
-                Cuidado de Ninos
+                Cuidado de Niños
               </label>
               <label
                 style="
@@ -302,7 +301,7 @@
                   class="servicio-check"
                   value="jardineria"
                 />
-                Jardineria
+                Jardinería
               </label>
             </div>
             <button
@@ -316,11 +315,11 @@
 
           <!-- CUIDADORES FAVORITOS -->
           <div class="profile-card-pro">
-            <h2 class="card-title">Cuidadores Favoritos</h2>
+            <h2 class="card-title">⭐ Cuidadores Favoritos</h2>
             <div id="favoritos-container">
               <p class="empty-state">
-                Aun no tienes cuidadores favoritos. Explora nuestra lista y
-                añade los que mas te gusten.
+                Aún no tienes cuidadores favoritos. Explora nuestra lista y
+                añade los que más te gusten.
               </p>
             </div>
             <a
@@ -339,14 +338,14 @@
 
           <!-- PRÓXIMOS SERVICIOS -->
           <div class="profile-card-pro">
-            <h2 class="card-title">Proximos Servicios</h2>
+            <h2 class="card-title">📅 Próximos Servicios</h2>
             <div id="servicios-container">
               <p class="empty-state">
-                No tienes servicios programados proximamente.
+                No tienes servicios programados próximamente.
               </p>
             </div>
             <a
-              href="lista-profesionales.html"
+              href="servicios.html"
               class="btn-primary"
               style="
                 display: block;
@@ -360,48 +359,44 @@
           </div>
         </div>
       </div>
+    </main>
 
-      <!-- MODO EDICIÓN -->
-      <div id="edit-mode" style="display: none; margin-top: 30px">
-        <div class="profile-card-pro" style="max-width: 600px; margin: 0 auto">
-          <h2 style="margin-bottom: 30px; font-size: 1.8rem">
-            Editar Mis Datos
-          </h2>
-          <form id="form-edit-profile">
-            <div class="form-grid-2col">
-              <div class="form-group">
-                <label style="font-weight: 600">Nombre</label>
-                <input
-                  type="text"
-                  id="edit-nombre"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 6px;
-                  "
-                />
-              </div>
-              <div class="form-group">
-                <label style="font-weight: 600">Apellidos</label>
-                <input
-                  type="text"
-                  id="edit-apellidos"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 6px;
-                  "
-                />
-              </div>
-            </div>
+    <!-- MODAL EDICIÓN -->
+    <div
+      id="edit-mode"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        class="profile-card-pro"
+        style="
+          max-width: 600px;
+          width: 90%;
+          margin: 0 auto;
+          max-height: 90vh;
+          overflow-y: auto;
+        "
+      >
+        <h2 style="margin-bottom: 30px; font-size: 1.8rem">
+          ⚙️ Editar Mis Datos
+        </h2>
+        <form id="form-edit-profile">
+          <div class="form-grid-2col">
             <div class="form-group">
-              <label style="font-weight: 600">Telefono</label>
+              <label style="font-weight: 600">Nombre</label>
               <input
                 type="text"
-                id="edit-phone"
-                placeholder="+34..."
+                id="edit-nombre"
                 style="
                   width: 100%;
                   padding: 10px;
@@ -410,27 +405,54 @@
                 "
               />
             </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px">
-              <button
-                type="submit"
-                class="btn-primary"
-                style="flex: 1; padding: 12px; font-weight: 600"
-              >
-                Guardar Cambios
-              </button>
-              <button
-                type="button"
-                class="btn-outline"
-                onclick="toggleEditMode()"
-                style="flex: 1; padding: 12px; font-weight: 600"
-              >
-                Cancelar
-              </button>
+            <div class="form-group">
+              <label style="font-weight: 600">Apellidos</label>
+              <input
+                type="text"
+                id="edit-apellidos"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 6px;
+                "
+              />
             </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-group">
+            <label style="font-weight: 600">Teléfono</label>
+            <input
+              type="text"
+              id="edit-phone"
+              placeholder="+34..."
+              style="
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
+              "
+            />
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 20px">
+            <button
+              type="submit"
+              class="btn-primary"
+              style="flex: 1; padding: 12px; font-weight: 600"
+            >
+              💾 Guardar Cambios
+            </button>
+            <button
+              type="button"
+              class="btn-outline"
+              onclick="toggleEditMode()"
+              style="flex: 1; padding: 12px; font-weight: 600"
+            >
+              ❌ Cancelar
+            </button>
+          </div>
+        </form>
       </div>
-    </main>
+    </div>
 
     <script src="js/script.js"></script>
     <script src="js/auth.js"></script>
