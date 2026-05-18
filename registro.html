@@ -20,9 +20,9 @@
           title="Selector de Accesibilidad"
           style="margin-right: 10px"
         >
-          <option value="normal">👁️ Estándar</option>
-          <option value="protanopia">🎨 Daltonismo</option>
-          <option value="high-contrast">🌓 Alto Contraste</option>
+          <option value="normal">Estandar</option>
+          <option value="protanopia">Daltonismo</option>
+          <option value="high-contrast">Alto Contraste</option>
         </select>
         <a href="index.html" class="btn-outline">Volver al inicio</a>
       </div>
@@ -33,16 +33,16 @@
         <div class="text-center" style="margin-bottom: 30px">
           <h2 style="font-size: 2.2rem; font-weight: 800">Crea tu cuenta</h2>
           <p style="color: var(--text-muted)">
-            Registro oficial con verificación de identidad
+            Registro oficial con verificacion de identidad
           </p>
         </div>
 
         <div class="role-selector">
           <button type="button" id="tab-worker" class="role-btn active">
-            👤 Soy Cuidador
+            Soy Cuidador
           </button>
           <button type="button" id="tab-employer" class="role-btn">
-            🏠 Busco Cuidados
+            Busco Cuidados
           </button>
         </div>
 
@@ -55,7 +55,7 @@
               <input
                 type="text"
                 name="nombre"
-                placeholder="Ej: María"
+                placeholder="Ej: Maria"
                 required
               />
             </div>
@@ -65,7 +65,7 @@
               <input
                 type="text"
                 name="apellidos"
-                placeholder="Ej: García López"
+                placeholder="Ej: Garcia Lopez"
                 required
               />
             </div>
@@ -76,7 +76,7 @@
             </div>
 
             <div class="form-group">
-              <label>Teléfono de contacto</label>
+              <label>Telefono de contacto</label>
               <input
                 type="tel"
                 name="telefono"
@@ -86,7 +86,7 @@
             </div>
 
             <div class="form-group" style="grid-column: span 2">
-              <label>Correo electrónico</label>
+              <label>Correo electronico</label>
               <input
                 type="email"
                 name="email"
@@ -96,7 +96,7 @@
             </div>
 
             <div class="form-group" style="grid-column: span 2">
-              <label>Contraseña</label>
+              <label>Contrasena</label>
               <input
                 type="password"
                 name="password_hash"
@@ -105,10 +105,46 @@
               />
             </div>
 
+            <!-- BLOQUE CUIDADOR -->
             <div id="block-cuidador" class="form-group full">
-              <h3 class="step-title">Información Profesional</h3>
+              <h3 class="step-title">Informacion Profesional</h3>
+
+              <!-- SELECTOR DE CATEGORIA -->
+              <div class="form-group full" style="margin-bottom: 20px">
+                <label style="font-weight: 700">Categoria de servicio</label>
+                <p
+                  style="
+                    color: var(--text-muted);
+                    font-size: 0.9rem;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Selecciona en que categoria ofreces tus servicios. Esto
+                  determinara donde aparezcas en la lista de profesionales.
+                </p>
+                <select
+                  name="categoria_servicio"
+                  id="categoria_servicio"
+                  style="
+                    width: 100%;
+                    padding: 14px;
+                    border-radius: 10px;
+                    border: 1px solid var(--border);
+                    font-size: 1rem;
+                  "
+                >
+                  <option value="">Selecciona una categoria...</option>
+                  <option value="mayores">Cuidado de Mayores</option>
+                  <option value="ninos">Cuidado de Ninos</option>
+                  <option value="mascotas">Cuidado de Mascotas</option>
+                  <option value="otros">
+                    Otros Servicios (Limpieza, Jardineria, etc.)
+                  </option>
+                </select>
+              </div>
+
               <div class="form-group" style="width: 50%; margin-bottom: 20px">
-                <label>Tarifa por hora (€)</label>
+                <label>Tarifa por hora (euros)</label>
                 <input
                   type="number"
                   name="precio_hora"
@@ -116,24 +152,26 @@
                   placeholder="12.50"
                 />
               </div>
-              <label>Biografía y Experiencia</label>
+
+              <label>Biografia y Experiencia</label>
               <textarea
                 name="bio"
                 rows="4"
-                placeholder="Cuéntanos tu trayectoria..."
+                placeholder="Cuentanos tu trayectoria..."
               ></textarea>
             </div>
 
+            <!-- BLOQUE FAMILIA -->
             <div
               id="block-familia"
               class="form-group full"
               style="display: none"
             >
-              <h3 class="step-title">Información del Servicio</h3>
+              <h3 class="step-title">Informacion del Servicio</h3>
               <div class="form-group full">
-                <label>¿Para quién solicitas el cuidado?</label>
+                <label>Para quien solicitas el cuidado?</label>
                 <select id="select-target" name="target">
-                  <option value="self">Para mí mismo/a</option>
+                  <option value="self">Para mi mismo/a</option>
                   <option value="other">
                     Para un familiar (Padres, hijos, etc.)
                   </option>
@@ -171,11 +209,11 @@
                     <input
                       type="number"
                       name="edad_familiar"
-                      placeholder="Años"
+                      placeholder="Anos"
                     />
                   </div>
                   <div class="form-group">
-                    <label>Ubicación</label>
+                    <label>Ubicacion</label>
                     <input
                       type="text"
                       name="ubicacion"
@@ -189,13 +227,13 @@
 
           <div style="margin-top: 30px">
             <button type="submit" class="btn-primary full">
-              Completar Registro Profesional
+              Completar Registro
             </button>
           </div>
         </form>
 
         <div class="text-center" style="margin-top: 20px; font-size: 0.9rem">
-          ¿Ya tienes cuenta?
+          Ya tienes cuenta?
           <a
             href="login.html"
             style="
@@ -203,7 +241,7 @@
               font-weight: 700;
               text-decoration: none;
             "
-            >Inicia sesión aquí</a
+            >Inicia sesion aqui</a
           >
         </div>
       </div>

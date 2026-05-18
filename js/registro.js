@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentRole = "cuidador";
 
-  // Gestión de Roles (Tabs)
+  // Gestión de Roles
   btnWorker.onclick = () => {
     currentRole = "cuidador";
     btnWorker.classList.add("active");
@@ -26,12 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
     blockFamilia.style.display = "block";
   };
 
-  // Lógica para mostrar/ocultar datos del familiar
+  // Mostrar/ocultar datos del familiar
   if (selectTarget) {
     selectTarget.onchange = (e) => {
       if (e.target.value === "other") {
         boxThirdParty.style.display = "block";
-        // Pequeño delay para que la transición CSS funcione
         setTimeout(() => boxThirdParty.classList.add("show"), 10);
       } else {
         boxThirdParty.classList.remove("show");
@@ -47,7 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const formData = new FormData(form);
     const rawData = Object.fromEntries(formData.entries());
 
-    // Objeto final para enviar a PostgreSQL
+    // Validar categoria si es cuidador
+    if (currentRole === "cuidador" && !rawData.categoria_servicio) {
+      alert("Por favor selecciona una categoria de servicio.");
+      return;
+    }
+
     const payload = {
       nombre: rawData.nombre,
       apellidos: rawData.apellidos,
@@ -58,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       rol: currentRole,
       bio: rawData.bio || "",
       precio_hora: rawData.precio_hora ? parseFloat(rawData.precio_hora) : 0,
-      // Datos extra de familia (opcionales según tu lógica de negocio)
+      categoria_servicio: rawData.categoria_servicio || null,
       nombre_familiar: rawData.nombre_familiar || null,
       parentesco: rawData.parentesco || null,
       edad_familiar: rawData.edad_familiar || null,
@@ -73,18 +77,97 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (response.ok) {
-        localStorage.setItem("usuario_sesion", JSON.stringify(payload));
-        alert("¡Bienvenido/a a CasaCuidadoPro!");
-        window.location.href = "perfil.html";
+        const userData = await response.json();
+
+        const sesion = {
+          id: userData.user?.id || null,
+          nombre: payload.nombre,
+          apellidos: payload.apellidos,
+          email: payload.email,
+          role: payload.rol,
+          bio: payload.bio,
+          telefono: payload.telefono,
+          precio: payload.precio_hora,
+          categoria_servicio: payload.categoria_servicio,
+        };
+
+        localStorage.setItem("usuario_sesion", JSON.stringify(sesion));
+
+        // Guardar en lista de profesionales si es cuidador
+        if (currentRole === "cuidador") {
+          guardarProfesionalAlRegistrarse(sesion);
+        }
+
+        alert("Bienvenido/a a CasaCuidadoPro!");
+
+        if (currentRole === "cuidador") {
+          window.location.href = "perfil.html";
+        } else {
+          window.location.href = "perfil-familia.html";
+        }
       } else {
         const err = await response.json();
-        alert("Error: " + err.message);
+        alert("Error: " + (err.detail || err.message || "Error desconocido"));
       }
     } catch (error) {
       console.error("Error:", error);
-      // Simulación para desarrollo
-      localStorage.setItem("usuario_sesion", JSON.stringify(payload));
-      window.location.href = "perfil.html";
+
+      const sesion = {
+        id: null,
+        nombre: payload.nombre,
+        apellidos: payload.apellidos,
+        email: payload.email,
+        role: payload.rol,
+        bio: payload.bio,
+        telefono: payload.telefono,
+        precio: payload.precio_hora,
+        categoria_servicio: payload.categoria_servicio,
+      };
+
+      localStorage.setItem("usuario_sesion", JSON.stringify(sesion));
+
+      if (currentRole === "cuidador") {
+        guardarProfesionalAlRegistrarse(sesion);
+        window.location.href = "perfil.html";
+      } else {
+        window.location.href = "perfil-familia.html";
+      }
     }
   };
 });
+
+function guardarProfesionalAlRegistrarse(sesion) {
+  const profesional = {
+    id: sesion.email,
+    nombre: `${sesion.nombre} ${sesion.apellidos || ""}`.trim(),
+    servicio: sesion.categoria_servicio || "otros",
+    precio: sesion.precio ? `${sesion.precio} euros/h` : "A consultar",
+    rating: "Nuevo",
+    img: getImagenPorCategoria(sesion.categoria_servicio),
+    formacion: "",
+    equipamiento: "",
+    esUsuario: true,
+  };
+
+  const lista =
+    JSON.parse(localStorage.getItem("profesionales_usuarios")) || [];
+  const index = lista.findIndex((p) => p.id === profesional.id);
+
+  if (index >= 0) {
+    lista[index] = profesional;
+  } else {
+    lista.push(profesional);
+  }
+
+  localStorage.setItem("profesionales_usuarios", JSON.stringify(lista));
+}
+
+function getImagenPorCategoria(categoria) {
+  const imagenes = {
+    mayores: "imagenes/CuidadoMayores.jpg",
+    ninos: "imagenes/CuidadoInfantil.jpg",
+    mascotas: "imagenes/CuidadorPerros.webp",
+    otros: "imagenes/Servicios.jpg",
+  };
+  return imagenes[categoria] || "imagenes/CuidadoMayores.jpg";
+}

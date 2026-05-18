@@ -1,3 +1,10 @@
+// ========== HELPER: CLAVE POR USUARIO ==========
+function storageKey(key) {
+  const user = JSON.parse(localStorage.getItem("usuario_sesion"));
+  return user ? `${user.email}_${key}` : key;
+}
+
+// ========== INIT ==========
 document.addEventListener("DOMContentLoaded", () => {
   let user = JSON.parse(localStorage.getItem("usuario_sesion"));
 
@@ -5,6 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
     return;
   }
+
+  // Cargar arrays con clave de usuario
+  skillsData =
+    JSON.parse(localStorage.getItem(storageKey("user_skills"))) || [];
+  certificationsData =
+    JSON.parse(localStorage.getItem(storageKey("user_certifications"))) || [];
+  equipmentData =
+    JSON.parse(localStorage.getItem(storageKey("user_equipment"))) || [];
+  experienceData =
+    JSON.parse(localStorage.getItem(storageKey("user_experience"))) || [];
+  languagesData =
+    JSON.parse(localStorage.getItem(storageKey("user_languages"))) || [];
 
   renderProfile(user);
 
@@ -20,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       user.precio = document.getElementById("edit-precio").value;
 
       localStorage.setItem("usuario_sesion", JSON.stringify(user));
-
+      guardarProfesionalEnLista(user);
       renderProfile(user);
       toggleEditMode();
       alert("✅ Perfil actualizado correctamente");
@@ -29,10 +48,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// ========== GUARDAR EN LISTA PROFESIONALES ==========
+function guardarProfesionalEnLista(user) {
+  if (user.role !== "cuidador") return;
+
+  const servicio = user.categoria_servicio || "otros";
+  const imagenes = {
+    mayores: "imagenes/CuidadoMayores.jpg",
+    ninos: "imagenes/CuidadoInfantil.jpg",
+    mascotas: "imagenes/CuidadorPerros.webp",
+    otros: "imagenes/Servicios.jpg",
+  };
+
+  const profesional = {
+    id: user.id || user.email,
+    nombre: `${user.nombre} ${user.apellidos || ""}`.trim(),
+    servicio: servicio,
+    precio: user.precio ? `${user.precio}€/h` : "A consultar",
+    rating: "Nuevo",
+    img: imagenes[servicio] || "imagenes/CuidadoMayores.jpg",
+    formacion:
+      (
+        JSON.parse(localStorage.getItem(storageKey("user_certifications"))) ||
+        []
+      ).join(", ") || "Sin especificar",
+    equipamiento:
+      (
+        JSON.parse(localStorage.getItem(storageKey("user_equipment"))) || []
+      ).join(", ") || "",
+    esUsuario: true,
+  };
+
+  const lista =
+    JSON.parse(localStorage.getItem("profesionales_usuarios")) || [];
+  const index = lista.findIndex((p) => p.id === profesional.id);
+
+  if (index >= 0) {
+    lista[index] = profesional;
+  } else {
+    lista.push(profesional);
+  }
+
+  localStorage.setItem("profesionales_usuarios", JSON.stringify(lista));
+}
+
+// ========== RENDER PERFIL ==========
 function renderProfile(user) {
   document.getElementById("display-name").innerText =
-    `${user.nombre} ${user.apellidos}`;
-  document.getElementById("display-email").innerText = user.email;
+    `${user.nombre} ${user.apellidos || ""}`;
   document.getElementById("display-bio").innerText =
     user.bio || "Añade una biografía profesional para destacar...";
 
@@ -88,7 +151,7 @@ function toggleEditMode() {
 }
 
 // ========== SKILLS ==========
-let skillsData = JSON.parse(localStorage.getItem("user_skills")) || [];
+let skillsData = [];
 
 function toggleSkillsMenu() {
   const panel = document.getElementById("skills-edit-panel");
@@ -103,7 +166,6 @@ function addSkill() {
     alert("Por favor, ingresa una especialidad");
     return;
   }
-
   if (skillsData.length >= 5) {
     alert("Máximo 5 especialidades");
     return;
@@ -111,7 +173,7 @@ function addSkill() {
 
   if (!skillsData.includes(skill)) {
     skillsData.push(skill);
-    localStorage.setItem("user_skills", JSON.stringify(skillsData));
+    localStorage.setItem(storageKey("user_skills"), JSON.stringify(skillsData));
     input.value = "";
     renderSkills();
     toggleSkillsMenu();
@@ -120,19 +182,17 @@ function addSkill() {
 
 function removeSkill(skill) {
   skillsData = skillsData.filter((s) => s !== skill);
-  localStorage.setItem("user_skills", JSON.stringify(skillsData));
+  localStorage.setItem(storageKey("user_skills"), JSON.stringify(skillsData));
   renderSkills();
 }
 
 function renderSkills() {
   const container = document.getElementById("skills-container");
-
   if (skillsData.length === 0) {
     container.innerHTML =
       '<p class="empty-state">No hay especialidades añadidas</p>';
     return;
   }
-
   container.innerHTML = skillsData
     .map(
       (skill) => `
@@ -146,12 +206,10 @@ function renderSkills() {
 }
 
 // ========== CERTIFICACIONES ==========
-let certificationsData =
-  JSON.parse(localStorage.getItem("user_certifications")) || [];
+let certificationsData = [];
 
 function addCertificate(type) {
   let certValue = "";
-
   if (type === "select") {
     const select = document.getElementById("select-cert-oficial");
     certValue = select.value;
@@ -167,7 +225,6 @@ function addCertificate(type) {
   }
 
   if (!certValue) return;
-
   if (certificationsData.length >= 5) {
     alert("Máximo 5 certificaciones");
     return;
@@ -176,7 +233,7 @@ function addCertificate(type) {
   if (!certificationsData.includes(certValue)) {
     certificationsData.push(certValue);
     localStorage.setItem(
-      "user_certifications",
+      storageKey("user_certifications"),
       JSON.stringify(certificationsData),
     );
     renderCertifications();
@@ -186,7 +243,7 @@ function addCertificate(type) {
 function removeCertification(cert) {
   certificationsData = certificationsData.filter((c) => c !== cert);
   localStorage.setItem(
-    "user_certifications",
+    storageKey("user_certifications"),
     JSON.stringify(certificationsData),
   );
   renderCertifications();
@@ -194,13 +251,11 @@ function removeCertification(cert) {
 
 function renderCertifications() {
   const container = document.getElementById("selected-certs-container");
-
   if (certificationsData.length === 0) {
     container.innerHTML =
       '<p class="empty-state">Añade tus certificaciones profesionales</p>';
     return;
   }
-
   container.innerHTML = certificationsData
     .map(
       (cert) => `
@@ -214,7 +269,7 @@ function renderCertifications() {
 }
 
 // ========== EQUIPAMIENTO ==========
-let equipmentData = JSON.parse(localStorage.getItem("user_equipment")) || [];
+let equipmentData = [];
 
 function addEquipo() {
   const input = document.getElementById("input-equipo-libre");
@@ -224,7 +279,6 @@ function addEquipo() {
     alert("Por favor, ingresa un equipo");
     return;
   }
-
   if (equipmentData.length >= 10) {
     alert("Máximo 10 equipos");
     return;
@@ -232,7 +286,10 @@ function addEquipo() {
 
   if (!equipmentData.includes(equipo)) {
     equipmentData.push(equipo);
-    localStorage.setItem("user_equipment", JSON.stringify(equipmentData));
+    localStorage.setItem(
+      storageKey("user_equipment"),
+      JSON.stringify(equipmentData),
+    );
     input.value = "";
     renderEquipment();
   }
@@ -240,18 +297,19 @@ function addEquipo() {
 
 function removeEquipo(item) {
   equipmentData = equipmentData.filter((e) => e !== item);
-  localStorage.setItem("user_equipment", JSON.stringify(equipmentData));
+  localStorage.setItem(
+    storageKey("user_equipment"),
+    JSON.stringify(equipmentData),
+  );
   renderEquipment();
 }
 
 function renderEquipment() {
   const container = document.getElementById("selected-equipo-container");
-
   if (equipmentData.length === 0) {
     container.innerHTML = '<p class="empty-state">Añade tu equipamiento</p>';
     return;
   }
-
   container.innerHTML = equipmentData
     .map(
       (item) => `
@@ -265,7 +323,7 @@ function renderEquipment() {
 }
 
 // ========== EXPERIENCIA ==========
-let experienceData = JSON.parse(localStorage.getItem("user_experience")) || [];
+let experienceData = [];
 
 function addExperiencia() {
   const titulo = document.getElementById("input-exp-titulo").value.trim();
@@ -280,7 +338,10 @@ function addExperiencia() {
   }
 
   experienceData.push({ titulo, fecha, descripcion });
-  localStorage.setItem("user_experience", JSON.stringify(experienceData));
+  localStorage.setItem(
+    storageKey("user_experience"),
+    JSON.stringify(experienceData),
+  );
 
   document.getElementById("input-exp-titulo").value = "";
   document.getElementById("input-exp-fecha").value = "";
@@ -291,7 +352,10 @@ function addExperiencia() {
 
 function removeExperiencia(index) {
   experienceData.splice(index, 1);
-  localStorage.setItem("user_experience", JSON.stringify(experienceData));
+  localStorage.setItem(
+    storageKey("user_experience"),
+    JSON.stringify(experienceData),
+  );
   renderExperience();
 }
 
@@ -321,7 +385,7 @@ function renderExperience() {
 }
 
 // ========== IDIOMAS ==========
-let languagesData = JSON.parse(localStorage.getItem("user_languages")) || [];
+let languagesData = [];
 
 function addIdioma() {
   const nombre = document.getElementById("input-idioma-nombre").value.trim();
@@ -333,7 +397,10 @@ function addIdioma() {
   }
 
   languagesData.push({ nombre, nivel });
-  localStorage.setItem("user_languages", JSON.stringify(languagesData));
+  localStorage.setItem(
+    storageKey("user_languages"),
+    JSON.stringify(languagesData),
+  );
 
   document.getElementById("input-idioma-nombre").value = "";
   document.getElementById("input-idioma-nivel").value = "";
@@ -343,7 +410,10 @@ function addIdioma() {
 
 function removeIdioma(index) {
   languagesData.splice(index, 1);
-  localStorage.setItem("user_languages", JSON.stringify(languagesData));
+  localStorage.setItem(
+    storageKey("user_languages"),
+    JSON.stringify(languagesData),
+  );
   renderLanguages();
 }
 
@@ -368,7 +438,7 @@ function renderLanguages() {
     .join("");
 }
 
-// Cargar todos los datos al iniciar
+// ========== CARGAR TODO ==========
 function loadAllData() {
   renderSkills();
   renderCertifications();

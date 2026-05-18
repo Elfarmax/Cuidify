@@ -1,3 +1,10 @@
+// ========== HELPER: CLAVE POR USUARIO ==========
+function storageKey(key) {
+  const user = JSON.parse(localStorage.getItem("usuario_sesion"));
+  return user ? `${user.email}_${key}` : key;
+}
+
+// ========== INIT ==========
 document.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuario_sesion"));
 
@@ -42,7 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const familiar = { nombre, parentesco, edad, necesidades };
-      localStorage.setItem("familiar_datos", JSON.stringify(familiar));
+      localStorage.setItem(
+        storageKey("familiar_datos"),
+        JSON.stringify(familiar),
+      );
       alert("Datos del familiar guardados correctamente.");
       mostrarFamiliarGuardado(familiar);
     });
@@ -54,12 +64,16 @@ document.addEventListener("DOMContentLoaded", () => {
     btnGuardarServicios.addEventListener("click", () => {
       const checkboxes = document.querySelectorAll(".servicio-check:checked");
       const servicios = Array.from(checkboxes).map((cb) => cb.value);
-      localStorage.setItem("servicios_necesitados", JSON.stringify(servicios));
+      localStorage.setItem(
+        storageKey("servicios_necesitados"),
+        JSON.stringify(servicios),
+      );
       alert("Preferencias guardadas correctamente.");
     });
   }
 });
 
+// ========== RENDER PERFIL ==========
 function renderPerfilFamilia(usuario) {
   document.getElementById("display-name").innerText =
     `${usuario.nombre} ${usuario.apellidos || ""}`;
@@ -67,7 +81,7 @@ function renderPerfilFamilia(usuario) {
     .charAt(0)
     .toUpperCase();
   document.getElementById("display-bio").innerText =
-    usuario.bio || "Sin informacion añadida.";
+    usuario.bio || "Sin información añadida.";
 
   const emailLink = document.getElementById("display-email");
   emailLink.href = `mailto:${usuario.email}`;
@@ -78,7 +92,7 @@ function renderPerfilFamilia(usuario) {
     phoneLink.href = `tel:${usuario.telefono}`;
     phoneLink.innerText = usuario.telefono;
   } else {
-    phoneLink.innerText = "Añadir telefono";
+    phoneLink.innerText = "Añadir teléfono";
   }
 
   document.getElementById("edit-nombre").value = usuario.nombre || "";
@@ -86,8 +100,11 @@ function renderPerfilFamilia(usuario) {
   document.getElementById("edit-phone").value = usuario.telefono || "";
 }
 
+// ========== FAMILIAR ==========
 function cargarFamiliar() {
-  const familiar = JSON.parse(localStorage.getItem("familiar_datos"));
+  const familiar = JSON.parse(
+    localStorage.getItem(storageKey("familiar_datos")),
+  );
   if (!familiar) return;
 
   document.getElementById("familiar-nombre").value = familiar.nombre || "";
@@ -113,9 +130,10 @@ function mostrarFamiliarGuardado(familiar) {
   `;
 }
 
+// ========== SERVICIOS ==========
 function cargarServicios() {
   const servicios =
-    JSON.parse(localStorage.getItem("servicios_necesitados")) || [];
+    JSON.parse(localStorage.getItem(storageKey("servicios_necesitados"))) || [];
   const checkboxes = document.querySelectorAll(".servicio-check");
   checkboxes.forEach((cb) => {
     if (servicios.includes(cb.value)) {
@@ -124,6 +142,7 @@ function cargarServicios() {
   });
 }
 
+// ========== TOGGLE EDICIÓN ==========
 function toggleEditMode() {
   const editMode = document.getElementById("edit-mode");
   editMode.style.display = editMode.style.display === "none" ? "block" : "none";

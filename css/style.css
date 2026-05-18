@@ -60,8 +60,16 @@ html {
 body {
   background-color: var(--bg-light);
   background-image:
-    radial-gradient(circle at top left, rgba(110, 142, 251, 0.16), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(99, 102, 241, 0.1), transparent 22%);
+    radial-gradient(
+      circle at top left,
+      rgba(110, 142, 251, 0.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(99, 102, 241, 0.1),
+      transparent 22%
+    );
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
@@ -1004,7 +1012,9 @@ h3 {
   background: white;
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .tarjeta-profesional-exclusiva:hover {
@@ -1081,7 +1091,10 @@ h3 {
   color: white;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
   box-shadow: 0 10px 24px rgba(79, 70, 229, 0.18);
 }
 
@@ -1170,7 +1183,10 @@ h3 {
   color: white;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
   box-shadow: 0 14px 30px rgba(110, 142, 251, 0.18);
 }
 
@@ -1377,7 +1393,9 @@ h3 {
   border-radius: 16px;
   padding: 14px 12px;
   font-weight: 700;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .messages-filters button:hover,
@@ -1418,7 +1436,10 @@ h3 {
   border-radius: 22px;
   background: #ffffff;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .message-card:hover {
@@ -1694,11 +1715,8 @@ h3 {
   }
 }
 
-  }
-
-  .menu-dropdown-content {
-    min-width: 200px;
-  }
+.menu-dropdown-content {
+  min-width: 200px;
 }
 
 /* =========================================
@@ -2256,7 +2274,6 @@ h3 {
   color: #e63946;
 }
 
-
 .txt-precio b {
   color: #2d3436;
   font-size: 1.1rem;
@@ -2280,21 +2297,129 @@ h3 {
   background-color: #dc3545 !important;
   color: white !important;
 }
+/* =========================================
+   LISTA PROFESIONALES - TARJETAS NUEVAS
+   ========================================= */
 
-.formacion-box {
-  text-align: center;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #e2e8f0;
+#lista-cards {
+  display: block !important;
+  grid-template-columns: none !important;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
-.formacion-titulo {
+.categoria-cards {
+  display: block !important;
+  grid-template-columns: none !important;
+}
+
+.tarjeta-pro-nueva {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #eef0f6;
+  box-shadow: 0 2px 16px rgba(15, 23, 42, 0.06);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.tarjeta-pro-nueva:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.12);
+}
+
+.avatar-pro {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+
+.info-pro {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nombre-pro {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.formacion-pro {
+  font-size: 0.83rem;
+  color: #64748b;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.precio-pro {
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.btn-contactar-pro {
+  flex-shrink: 0 !important;
+  width: auto !important;
+  min-width: 110px;
+  padding: 11px 22px !important;
+  border-radius: 12px !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 0.88rem !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: auto !important;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+.btn-contactar-pro:hover {
+  opacity: 0.85;
+  transform: scale(1.04);
+}
+
+.badge-nuevo {
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 0.72rem;
   font-weight: 700;
-  margin-bottom: 6px;
-  color: #475569;
+  padding: 3px 10px;
+  border-radius: 20px;
 }
 
-.formacion-texto {
-  color: #475569;
-  font-size: 0.94rem;
+.badge-rating {
+  color: #f59e0b;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
