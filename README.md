@@ -8,7 +8,7 @@ Mostrar imagen
 Mostrar imagen
 <br>
 
-Cuidify es una plataforma web que facilita la búsqueda y contratación de cuidadores profesionales para mayores, niños y mascotas — con un asistente de inteligencia artificial integrado para guiar a las familias en cada paso.
+CasaCuidadoPRO es una plataforma web que facilita la búsqueda y contratación de cuidadores profesionales para mayores, niños y mascotas — con un asistente de inteligencia artificial integrado para guiar a las familias en cada paso.
 
 <br>
 </div>
