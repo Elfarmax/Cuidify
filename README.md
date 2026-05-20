@@ -1,6 +1,6 @@
 <div align="center">
 <br>
-🤝 Cuidify
+🤝 CasaCuidadoPRO
 Conecta a familias con cuidadores profesionales de confianza
 <br>
 Mostrar imagen
@@ -13,7 +13,7 @@ Cuidify es una plataforma web que facilita la búsqueda y contratación de cuida
 <br>
 </div>
 
-¿Qué es Cuidify?
+¿Qué es CasaCuidadoPRO?
 Encontrar un cuidador de confianza es una de las decisiones más importantes que toma una familia. Cuidify nace para simplificar ese proceso: un espacio donde los cuidadores muestran su experiencia y certificaciones, y donde las familias pueden contactarlos, leer valoraciones reales y recibir recomendaciones personalizadas gracias a la IA.
 El proyecto fue desarrollado como Trabajo de Fin de Grado, con especial atención a la privacidad de los datos, la accesibilidad visual y una experiencia de usuario clara y humana.
 
