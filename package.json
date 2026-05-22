@@ -1,7 +1,7 @@
 {
   "name": "cuidify-develop-(2)",
   "version": "1.0.0",
-  "description": "<div align=\"center\">\r <br>\r 🤝 CasaCuidadoPRO\r Conecta a familias con cuidadores profesionales de confianza\r <br>\r Mostrar imagen\r Mostrar imagen\r Mostrar imagen\r <br>",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,13 +18,5 @@
     "express-rate-limit": "^8.5.1",
     "openai": "^6.37.0",
     "pg": "^8.20.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Elfarmax/Cuidify.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Elfarmax/Cuidify/issues"
-  },
-  "homepage": "https://github.com/Elfarmax/Cuidify#readme"
+  }
 }
